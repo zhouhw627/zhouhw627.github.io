@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>微信开发02 | zhouhw627&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="blog">
+  
+  <meta name="description" content="一、知识路径 接收普通消息  接收与（被动）回复  接口调用凭据access_token ==目标：能够实现被动回复图文消息；能够使用curl==   二、今日课程内容：微信开发02接收普通消息==案例：==实现将接收到的普通消息录入到数据库中。  在mysql中创建db8.tb1数据表： create database db8;  create table tb1( id int unsigne">
+<meta name="keywords" content="微信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信开发02">
+<meta property="og:url" content="https://zhouhw627.github.io/2018/12/04/微信开发02/index.html">
+<meta property="og:site_name" content="zhouhw627&#39;s blog">
+<meta property="og:description" content="一、知识路径 接收普通消息  接收与（被动）回复  接口调用凭据access_token ==目标：能够实现被动回复图文消息；能够使用curl==   二、今日课程内容：微信开发02接收普通消息==案例：==实现将接收到的普通消息录入到数据库中。  在mysql中创建db8.tb1数据表： create database db8;  create table tb1( id int unsigne">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/58.png">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/59">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/60">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/12">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/13">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/14">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/15">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/16">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/17">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/18">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/19">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/20">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/1">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/2">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/33">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/34">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/35">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/21">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/22">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/23">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/24">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/25">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/26">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/27">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/28">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/29">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/30">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/31">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/32">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/3">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/5">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/6">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/7">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/8">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/4">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/9">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/10">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/36">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/37">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/38">
+<meta property="og:updated_time" content="2018-12-04T14:53:53.227Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信开发02">
+<meta name="twitter:description" content="一、知识路径 接收普通消息  接收与（被动）回复  接口调用凭据access_token ==目标：能够实现被动回复图文消息；能够使用curl==   二、今日课程内容：微信开发02接收普通消息==案例：==实现将接收到的普通消息录入到数据库中。  在mysql中创建db8.tb1数据表： create database db8;  create table tb1( id int unsigne">
+<meta name="twitter:image" content="https://zhouhw627.github.io/2018/12/04/微信开发02/58.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">zhouhw627&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        zhouhw627&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="MinHow" target="_blank" href="//minhow.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/wongminho">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/WongMinHo">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/huangminhow">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-微信开发02" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      微信开发02
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/web前端/">web前端</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-12-04
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="一、知识路径"><a href="#一、知识路径" class="headerlink" title="一、知识路径"></a>一、知识路径</h1><ul>
+<li><p>接收普通消息</p>
+</li>
+<li><p>接收与（被动）回复</p>
+</li>
+<li><p>接口调用凭据access_token</p>
+<p>==目标：能够实现被动回复图文消息；能够使用curl==</p>
+</li>
+</ul>
+<h1 id="二、今日课程内容：微信开发02"><a href="#二、今日课程内容：微信开发02" class="headerlink" title="二、今日课程内容：微信开发02"></a>二、今日课程内容：微信开发02</h1><h3 id="接收普通消息"><a href="#接收普通消息" class="headerlink" title="接收普通消息"></a>接收普通消息</h3><p><strong>==案例：==</strong>实现将接收到的普通消息录入到数据库中。</p>
+<ol>
+<li><p>在mysql中创建db8.tb1数据表：</p>
+<pre><code class="mysql">create database db8;
+
+create table tb1(
+id int unsigned primary key auto_increment,
+openid varchar(100) not null default &#39;&#39; comment &#39;用户唯一标识openid&#39;,
+content varchar(255) not null default &#39;&#39; comment &#39;用户发送给平台的内容&#39;,
+post_date int unsigned not null default 0 comment &#39;用户发送时间&#39;
+)engine=MyISAM charset=utf8;
+</code></pre>
+</li>
+</ol>
+<ol start="2">
+<li><p>将day1/code/wx.php获得的信息通过PDO录入到数据库tb1表中：</p>
+<p><img src="/2018/12/04/微信开发02/58.png" alt="1543326106223"></p>
+</li>
+<li><p>测试用户发送消息后的效果：</p>
+<p><img src="/2018/12/04/微信开发02/59" alt="1543326318097"></p>
+<p>查看数据表：</p>
+<p><img src="/2018/12/04/微信开发02/60" alt="1543326318097"></p>
+</li>
+</ol>
+<h2 id="1-接入文件程序调整"><a href="#1-接入文件程序调整" class="headerlink" title="1. 接入文件程序调整"></a>1. 接入文件程序调整</h2><h3 id="构建自动判断接入程序"><a href="#构建自动判断接入程序" class="headerlink" title="构建自动判断接入程序"></a>构建自动判断接入程序</h3><ol>
+<li><p>首先在day2/code/a1.php中构建如下代码：</p>
+<p><img src="/2018/12/04/微信开发02/12" alt="1543632248344"></p>
+</li>
+<li><p>然后将微信后台的token值调整为a1.php中指定的token值，</p>
+<p>服务器配置：</p>
+<p><img src="/2018/12/04/微信开发02/13" alt="1543632306822"></p>
+<p>测试号管理：</p>
+<p><img src="/2018/12/04/微信开发02/14" alt="1543632353219"></p>
+</li>
+<li><p>然后在订阅号中进行测试：</p>
+<p><img src="/2018/12/04/微信开发02/15" alt="1543632384926"></p>
+<p>最终的效果为，我们没有手动切换方法，但是订阅号中也完成了自动回复。</p>
+</li>
+</ol>
+<h3 id="形成报文日志文件"><a href="#形成报文日志文件" class="headerlink" title="形成报文日志文件"></a>形成报文日志文件</h3><ol>
+<li><p>在day2/code/a1.php中构建一个新的方法record，负责记录报文信息：</p>
+<p><img src="/2018/12/04/微信开发02/16" alt="1543633264241"></p>
+</li>
+<li><p>然后在responseMsg方法中接收报文和回复报文的地方，调用record方法记录报文信息：</p>
+<p>接收之后记录：</p>
+<p><img src="/2018/12/04/微信开发02/17" alt="1543633314078"></p>
+<p>回复之前记录：</p>
+<p><img src="/2018/12/04/微信开发02/18" alt="1543633347132"></p>
+</li>
+<li><p>最终效果为：</p>
+<p>在订阅号中发送一条信息：</p>
+<p><img src="/2018/12/04/微信开发02/19" alt="1543633369365"></p>
+<p>观察日志文件：</p>
+<p><img src="/2018/12/04/微信开发02/20" alt="1543633393931"></p>
+<p>说明功能制作OK。</p>
+</li>
+</ol>
+<h2 id="2-接收与（被动）回复"><a href="#2-接收与（被动）回复" class="headerlink" title="2. 接收与（被动）回复"></a>2. 接收与（被动）回复</h2><p>在微信中，接收的消息被划分为6中类型，分别是：</p>
+<ul>
+<li>文本类型    关键字 text</li>
+<li>图片类型    关键字 image</li>
+<li>语音类型    关键字 voice</li>
+<li>视频类型    关键字 video</li>
+<li>地理位置类型    关键字 location</li>
+<li>链接类型    关键字 link</li>
+</ul>
+<p>首先我们需要弄明白两个问题，在公众号的使用中存在两方，一个是使用方，即用户；一个是管理方，即我们程序开发者；我们管理方想要通过程序来管理使用方，就必须要知道使用方的意图。我们知道，使用方是可以输入内容发送给公众号的，那么，管理方就可以通过接收使用方发送的信息内容，并分析判断其意图来回复使用方。</p>
+<p>在开发者技术文档中，已经明确的写出了接收与回复相关的文档内容：</p>
+<p>1）接收消息（明确给出了使用方发送给管理方的消息是什么格式，有哪些内容）</p>
+<p><img src="/2018/12/04/微信开发02/1" alt="1543461574993"></p>
+<p>2）回复消息（明确规定了管理方如果要回复使用方，应该以什么样的格式和包含哪些内容进行回复）</p>
+<p><img src="/2018/12/04/微信开发02/2" alt="1543461685338"></p>
+<h3 id="2-1-根据接收的文本信息回复文本信息"><a href="#2-1-根据接收的文本信息回复文本信息" class="headerlink" title="2.1 根据接收的文本信息回复文本信息"></a>2.1 根据接收的文本信息回复文本信息</h3><ol>
+<li><p>在day2/code/a1.php中创建一个方法responseText，实现返回文本信息，</p>
+<p><img src="/2018/12/04/微信开发02/33" alt="1543653066199"></p>
+</li>
+<li><p>然后在responseMsg方法中调用回复文本消息的方法，</p>
+<p><img src="/2018/12/04/微信开发02/34" alt="1543653183969"></p>
+</li>
+<li><p>测试效果：</p>
+<p><img src="/2018/12/04/微信开发02/35" alt="1543653204870"></p>
+</li>
+</ol>
+<h3 id="2-2-根据接收的图片信息原样回复图片信息"><a href="#2-2-根据接收的图片信息原样回复图片信息" class="headerlink" title="2.2 根据接收的图片信息原样回复图片信息"></a>2.2 根据接收的图片信息原样回复图片信息</h3><ol>
+<li><p>在day2/code/a1.php中创建一个方法response微信开发02，实现返回图片报文信息，</p>
+<p><img src="/2018/12/04/微信开发02/21" alt="1543636648566"></p>
+</li>
+<li><p>然后在responseMsg方法中调用回复图片消息的方法，</p>
+<p><img src="/2018/12/04/微信开发02/22" alt="1543636689564"></p>
+</li>
+<li><p>测试效果：</p>
+</li>
+</ol>
+<h3 id="2-3-根据接收的文本信息回复音乐"><a href="#2-3-根据接收的文本信息回复音乐" class="headerlink" title="2.3 根据接收的文本信息回复音乐"></a>2.3 根据接收的文本信息回复音乐</h3><ol>
+<li><p>首先在day2/code/a1.php中创建一个名为responseMusic方法，负责构建音乐的回复报文，</p>
+<p><img src="/2018/12/04/微信开发02/23" alt="1543646735610"></p>
+</li>
+<li><p>然后在responseMsg中增加判断，当用户发送包含”音乐-“的文本内容时，回复其音乐，</p>
+<p><img src="/2018/12/04/微信开发02/24" alt="1543646799525"></p>
+</li>
+<li><p>测试使用效果：</p>
+<p><img src="/2018/12/04/微信开发02/25" alt="1543646817852"></p>
+</li>
+</ol>
+<h3 id="2-4-根据接收的语音信息原样回复语音"><a href="#2-4-根据接收的语音信息原样回复语音" class="headerlink" title="2.4 根据接收的语音信息原样回复语音"></a>2.4 根据接收的语音信息原样回复语音</h3><ol>
+<li><p>首先在day2/code/a1.php中创建一个名为responseVoice方法，负责构建语音的回复报文，</p>
+<p><img src="/2018/12/04/微信开发02/26" alt="1543652805934"></p>
+</li>
+<li><p>然后在responseMsg中增加判断，当用户发送语音内容时，原样回复其语音，</p>
+<p><img src="/2018/12/04/微信开发02/27" alt="1543652853763"></p>
+</li>
+<li><p>测试使用效果：</p>
+<p><img src="/2018/12/04/微信开发02/28" alt="1543652875018"></p>
+</li>
+</ol>
+<h3 id="2-5-根据接收的地图定位回复位置的地址坐标信息"><a href="#2-5-根据接收的地图定位回复位置的地址坐标信息" class="headerlink" title="2.5 根据接收的地图定位回复位置的地址坐标信息"></a>2.5 根据接收的地图定位回复位置的地址坐标信息</h3><ol>
+<li><p>在day2/code/a1.php的responseMsg方法中构建回复地址坐标的文本信息内容，</p>
+<p><img src="/2018/12/04/微信开发02/29" alt="1543652936993"></p>
+</li>
+<li><p>测试使用效果：</p>
+<p><img src="/2018/12/04/微信开发02/30" alt="1543652955427"></p>
+</li>
+</ol>
+<h3 id="2-6-根据接收的分享链接内容回复链接信息"><a href="#2-6-根据接收的分享链接内容回复链接信息" class="headerlink" title="2.6 根据接收的分享链接内容回复链接信息"></a>2.6 根据接收的分享链接内容回复链接信息</h3><ol>
+<li><p>在day2/code/a1.php的responseMsg方法中构建回复链接地址的文本信息内容，</p>
+<p><img src="/2018/12/04/微信开发02/31" alt="1543652995166"></p>
+</li>
+<li><p>测试效果：</p>
+<p><img src="/2018/12/04/微信开发02/32" alt="1543653012490"></p>
+</li>
+</ol>
+<h2 id="3-接口调用凭据access-token"><a href="#3-接口调用凭据access-token" class="headerlink" title="3. 接口调用凭据access_token"></a>3. 接口调用凭据access_token</h2><p>access_token是公众号的全局唯一接口调用凭据，公众号调用各接口时都需使用access_token。开发者需要进行妥善保存。access_token的存储至少要保留512个字符空间。access_token的==有效期目前为2个小时==，需定时刷新，重复获取将导致上次获取的access_token失效。 </p>
+<h3 id="3-1-curl扩展"><a href="#3-1-curl扩展" class="headerlink" title="3.1 curl扩展"></a>3.1 curl扩展</h3><p>curl扩展不是PHP默认就开启的，需要先将其配置开启，才能使用。</p>
+<h4 id="3-1-1-windows下开启curl扩展"><a href="#3-1-1-windows下开启curl扩展" class="headerlink" title="3.1.1 windows下开启curl扩展"></a>3.1.1 windows下开启curl扩展</h4><p>步骤：</p>
+<ol>
+<li><p>检查php.ini中extension_dir配置项指定的目录是否正确；</p>
+</li>
+<li><p>检查extension_dir指定的目录中是否存在curl扩展文件php_curl.dll，存在则继续往下做配置；</p>
+</li>
+<li><p>然后将php.ini中curl扩展配置项开启：</p>
+<p><img src="/2018/12/04/微信开发02/3" alt="1543580961194"></p>
+</li>
+<li><p>将php根目录下的如下四个文件复制一份，拷贝到指定的目录中：</p>
+<p>复制如下文件：</p>
+<p><img src="/2018/12/04/微信开发02/5" alt="1543581112186"></p>
+<p><img src="/2018/12/04/微信开发02/6" alt="1543581125286"></p>
+<p><img src="/2018/12/04/微信开发02/7" alt="1543581140872"></p>
+<p><img src="/2018/12/04/微信开发02/8" alt="1543581152117"></p>
+<p>粘贴到如下phpinfo信息所指定的目录中：</p>
+<p><img src="/2018/12/04/微信开发02/4" alt="1543581085509"></p>
+</li>
+<li><p>重启apache，</p>
+<p><img src="/2018/12/04/微信开发02/9" alt="1543581201310"></p>
+</li>
+<li><p>再次查看phpinfo信息：</p>
+<p><img src="/2018/12/04/微信开发02/10" alt="1543581227143"></p>
+<p>能够见到上图所示的curl扩展配置项，则说明curl扩展开启成功。</p>
+</li>
+</ol>
+<h4 id="3-1-2-使用curl扩展模拟http的get请求"><a href="#3-1-2-使用curl扩展模拟http的get请求" class="headerlink" title="3.1.2 使用curl扩展模拟http的get请求"></a>3.1.2 使用curl扩展模拟http的get请求</h4><p>必备的设置项：</p>
+<pre><code class="php">// 设置请求URL地址
+curl_setopt($ch,CURLOPT_URL,$url);
+// 不获取header头信息
+curl_setopt($ch,CURLOPT_HEADER,0);
+// 结果不直接返回到终端
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+// 设置curl不进行证书的检测
+curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);
+curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);
+</code></pre>
+<p>生产环境推荐的设置项：</p>
+<pre><code class="php">// 超时时间 秒
+curl_setopt($ch,CURLOPT_TIMEOUT,10);
+// 设置请求的浏览器
+curl_setopt($ch,CURLOPT_USERAGENT,&#39;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36&#39;);
+</code></pre>
+<p><strong>==案例：==</strong>实现在访问code/t1.php的同时，在t1.php中利用curl模拟get请求code/t2.php，达到同时输出t1.php和t2.php的内容。</p>
+<p>==实现：==</p>
+<ol>
+<li><p>在day2/code目录下创建t1.php程序文件，内容如下：</p>
+<p><code>`</code>php<br>&lt;?php</p>
+<p>echo ‘t1.php<br>‘;</p>
+<p>//使用curl模拟get请求<br>#1. 初始化curl连接<br>$ch = curl_init();</p>
+<p>//请求的新的链接地址<br>$url = ‘<a href="http://969m2z.natappfree.cc/t2.php?name=小风风&amp;age=18&amp;height=1.9&#39;" target="_blank" rel="noopener">http://969m2z.natappfree.cc/t2.php?name=小风风&amp;age=18&amp;height=1.9&#39;</a>;</p>
+<p>#2. 设置curl选项<br>// 设置请求URL地址<br>curl_setopt($ch,CURLOPT_URL,$url);<br>// 不获取header头信息<br>curl_setopt($ch,CURLOPT_HEADER,0);<br>// 结果不直接返回到终端<br>curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);<br>// 设置curl不进行证书的检测<br>curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);<br>curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);</p>
+<p>// 超时时间 秒<br>curl_setopt($ch,CURLOPT_TIMEOUT,10);<br>// 设置请求的浏览器<br>curl_setopt($ch,CURLOPT_USERAGENT,’Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36’);</p>
+<p>#3. 执行curl<br>$data = curl_exec($ch);</p>
+<p>#4. 关闭curl连接<br>curl_close($ch);</p>
+</li>
+</ol>
+<p>   var_dump($data);</p>
+<p>   echo ‘<hr>‘;</p>
+<p>   echo ‘哈哈哈哈哈，看的到我么？’;</p>
+<pre><code>
+
+
+2. 同时在day2/code目录下创建t2.php文件，代码如下：
+
+   ```php
+   &lt;?php
+
+   echo &#39;t2.php&lt;br/&gt;&#39;;
+
+   var_dump( $_GET ); 
+</code></pre><ol start="3">
+<li><p>测试使用效果：</p>
+<p><img src="/2018/12/04/微信开发02/36" alt="1543656866209"></p>
+</li>
+</ol>
+<h4 id="3-1-3-使用curl扩展模拟http的post请求"><a href="#3-1-3-使用curl扩展模拟http的post请求" class="headerlink" title="3.1.3 使用curl扩展模拟http的post请求"></a>3.1.3 使用curl扩展模拟http的post请求</h4><p>在实现get请求的基础上需要增加的设置项：</p>
+<pre><code class="php">// 发起POST请求
+curl_setopt($ch,CURLOPT_POST,1);
+// post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式
+curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($data));
+</code></pre>
+<p><strong>==案例：==</strong>实现在访问code/t3.php的同时，在t1.php中利用curl模拟get请求code/t4.php，达到同时输出t1.php和t2.php的内容。</p>
+<p>==实现：==</p>
+<h4 id="3-1-4-使用curl扩展模拟http的post请求实现文件上传"><a href="#3-1-4-使用curl扩展模拟http的post请求实现文件上传" class="headerlink" title="3.1.4 使用curl扩展模拟http的post请求实现文件上传"></a>3.1.4 使用curl扩展模拟http的post请求实现文件上传</h4><p>==条件：==</p>
+<ol>
+<li>需要使用到系统类：CURLFile</li>
+<li>在实现post请求的基础，要去掉http_build_query格式化数据；</li>
+</ol>
+<p><strong>==案例：==</strong>实现在访问code/t5.php的同时，在t1.php中利用curl模拟get请求code/t6.php，达到同时输出t1.php和t2.php的内容。</p>
+<p>==实现：==</p>
+<h3 id="3-2-获取接口调用凭据access-token"><a href="#3-2-获取接口调用凭据access-token" class="headerlink" title="3.2 获取接口调用凭据access_token"></a>3.2 获取接口调用凭据access_token</h3><h2 id="三-全天总结"><a href="#三-全天总结" class="headerlink" title="三. 全天总结"></a>三. 全天总结</h2><ol>
+<li><p>接收消息与被动回复；</p>
+<p><img src="/2018/12/04/微信开发02/37" alt="1543657173246"></p>
+<p><img src="/2018/12/04/微信开发02/38" alt="1543657235250"></p>
+</li>
+<li><p>什么是curl：就是一个PHP的扩展</p>
+</li>
+<li><p>curl能干什么：模拟http请求（get请求）</p>
+</li>
+<li><p>access_token是什么 ：公众号调用各接口时都需的一个凭据</p>
+</li>
+</ol>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年12月04日 22:53</p>
+        <p>原始链接： <a class="post-url" href="/2018/12/04/微信开发02/" title="微信开发02">https://zhouhw627.github.io/2018/12/04/微信开发02/</a></p>
+        <footer>
+            <a href="https://zhouhw627.github.io">
+                <img src="/images/logo.png" alt="zhouhw">
+                zhouhw
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhouhw627.github.io/2018/12/04/微信开发02/&title=《微信开发02》 — zhouhw627's blog&pic=https://zhouhw627.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhouhw627.github.io/2018/12/04/微信开发02/&title=《微信开发02》 — zhouhw627's blog&source=博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhouhw627.github.io/2018/12/04/微信开发02/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《微信开发02》 — zhouhw627's blog&url=https://zhouhw627.github.io/2018/12/04/微信开发02/&via=https://zhouhw627.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhouhw627.github.io/2018/12/04/微信开发02/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhouhw627.github.io/2018/12/04/微信开发02/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/微信/" class="color3">微信</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、知识路径"><span class="post-toc-text">一、知识路径</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、今日课程内容：微信开发02"><span class="post-toc-text">二、今日课程内容：微信开发02</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#接收普通消息"><span class="post-toc-text">接收普通消息</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-接入文件程序调整"><span class="post-toc-text">1. 接入文件程序调整</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#构建自动判断接入程序"><span class="post-toc-text">构建自动判断接入程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#形成报文日志文件"><span class="post-toc-text">形成报文日志文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-接收与（被动）回复"><span class="post-toc-text">2. 接收与（被动）回复</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-根据接收的文本信息回复文本信息"><span class="post-toc-text">2.1 根据接收的文本信息回复文本信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-根据接收的图片信息原样回复图片信息"><span class="post-toc-text">2.2 根据接收的图片信息原样回复图片信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-根据接收的文本信息回复音乐"><span class="post-toc-text">2.3 根据接收的文本信息回复音乐</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-根据接收的语音信息原样回复语音"><span class="post-toc-text">2.4 根据接收的语音信息原样回复语音</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-根据接收的地图定位回复位置的地址坐标信息"><span class="post-toc-text">2.5 根据接收的地图定位回复位置的地址坐标信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-6-根据接收的分享链接内容回复链接信息"><span class="post-toc-text">2.6 根据接收的分享链接内容回复链接信息</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-接口调用凭据access-token"><span class="post-toc-text">3. 接口调用凭据access_token</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-curl扩展"><span class="post-toc-text">3.1 curl扩展</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-1-windows下开启curl扩展"><span class="post-toc-text">3.1.1 windows下开启curl扩展</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-2-使用curl扩展模拟http的get请求"><span class="post-toc-text">3.1.2 使用curl扩展模拟http的get请求</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-3-使用curl扩展模拟http的post请求"><span class="post-toc-text">3.1.3 使用curl扩展模拟http的post请求</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-4-使用curl扩展模拟http的post请求实现文件上传"><span class="post-toc-text">3.1.4 使用curl扩展模拟http的post请求实现文件上传</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-获取接口调用凭据access-token"><span class="post-toc-text">3.2 获取接口调用凭据access_token</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三-全天总结"><span class="post-toc-text">三. 全天总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/04/微信开发01/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">微信开发01</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2018 zhouhw<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://zhouhw627.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/web前端/">web前端</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/微信/" style="font-size: 10px;">微信</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/微信/" style="font-size: 10px;">微信</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
