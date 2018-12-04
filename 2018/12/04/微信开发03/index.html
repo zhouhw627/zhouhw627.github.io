@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>微信开发03 | zhouhw627&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="blog">
+  
+  <meta name="description" content="一、昨日回顾1. 知识回顾 实现根据接收用户的消息 被动回复用户相关消息； 使用curl实现模拟http的get请求；  2. 昨日反馈 二、知识路径 接口调用凭据access_token ==目标：能够获得access_token==  创建自定义菜单  删除自定义菜单 ==目标：能够通过程序管理菜单==  素材上传 ==目标：能够实现素材上传==   三、今日课程内容：微信开发031. 接口调">
+<meta name="keywords" content="weixin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信开发03">
+<meta property="og:url" content="http://yoursite.com/2018/12/04/微信开发03/index.html">
+<meta property="og:site_name" content="zhouhw627&#39;s blog">
+<meta property="og:description" content="一、昨日回顾1. 知识回顾 实现根据接收用户的消息 被动回复用户相关消息； 使用curl实现模拟http的get请求；  2. 昨日反馈 二、知识路径 接口调用凭据access_token ==目标：能够获得access_token==  创建自定义菜单  删除自定义菜单 ==目标：能够通过程序管理菜单==  素材上传 ==目标：能够实现素材上传==   三、今日课程内容：微信开发031. 接口调">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/2">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/3">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/5">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/6">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/7">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/8">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/4">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/9">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/10">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/36">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/11">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/12">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/13">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/15">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/16">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/17">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/18">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/19">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/20">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/1">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/21">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/22">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/23">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/24">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/25">
+<meta property="og:image" content="http://yoursite.com/2018/12/04/微信开发03/img/26">
+<meta property="og:updated_time" content="2018-12-04T02:00:18.255Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信开发03">
+<meta name="twitter:description" content="一、昨日回顾1. 知识回顾 实现根据接收用户的消息 被动回复用户相关消息； 使用curl实现模拟http的get请求；  2. 昨日反馈 二、知识路径 接口调用凭据access_token ==目标：能够获得access_token==  创建自定义菜单  删除自定义菜单 ==目标：能够通过程序管理菜单==  素材上传 ==目标：能够实现素材上传==   三、今日课程内容：微信开发031. 接口调">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/04/微信开发03/img/2">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">zhouhw627&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        zhouhw627&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="MinHow" target="_blank" href="//minhow.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/wongminho">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/WongMinHo">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/huangminhow">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-微信开发03" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      微信开发03
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/web前端/">web前端</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-12-04
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="一、昨日回顾"><a href="#一、昨日回顾" class="headerlink" title="一、昨日回顾"></a>一、昨日回顾</h1><h2 id="1-知识回顾"><a href="#1-知识回顾" class="headerlink" title="1. 知识回顾"></a>1. 知识回顾</h2><ol>
+<li>实现根据接收用户的消息 被动回复用户相关消息；</li>
+<li>使用curl实现模拟http的get请求；</li>
+</ol>
+<h2 id="2-昨日反馈"><a href="#2-昨日反馈" class="headerlink" title="2. 昨日反馈"></a>2. 昨日反馈</h2><p><img src="img/2" alt="1543764527253"></p>
+<h1 id="二、知识路径"><a href="#二、知识路径" class="headerlink" title="二、知识路径"></a>二、知识路径</h1><ul>
+<li><p>接口调用凭据access_token</p>
+<p>==目标：能够获得access_token==</p>
+</li>
+<li><p>创建自定义菜单</p>
+</li>
+<li><p>删除自定义菜单</p>
+<p>==目标：能够通过程序管理菜单==</p>
+</li>
+<li><p>素材上传</p>
+<p>==目标：能够实现素材上传==</p>
+</li>
+</ul>
+<h1 id="三、今日课程内容：微信开发03"><a href="#三、今日课程内容：微信开发03" class="headerlink" title="三、今日课程内容：微信开发03"></a>三、今日课程内容：微信开发03</h1><h2 id="1-接口调用凭据access-token"><a href="#1-接口调用凭据access-token" class="headerlink" title="1. 接口调用凭据access_token"></a>1. 接口调用凭据access_token</h2><p>access_token是公众号的全局唯一接口调用凭据，公众号调用各接口时都需使用access_token。开发者需要进行妥善保存。access_token的存储至少要保留512个字符空间。access_token的==有效期目前为2个小时==，需定时刷新，重复获取将导致上次获取的access_token失效。 </p>
+<h3 id="3-1-curl扩展"><a href="#3-1-curl扩展" class="headerlink" title="3.1 curl扩展"></a>3.1 curl扩展</h3><p>curl扩展不是PHP默认就开启的，需要先将其配置开启，才能使用。</p>
+<h4 id="3-1-1-windows下开启curl扩展"><a href="#3-1-1-windows下开启curl扩展" class="headerlink" title="3.1.1 windows下开启curl扩展"></a>3.1.1 windows下开启curl扩展</h4><p>步骤：</p>
+<ol>
+<li><p>检查php.ini中extension_dir配置项指定的目录是否正确；</p>
+</li>
+<li><p>检查extension_dir指定的目录中是否存在curl扩展文件php_curl.dll，存在则继续往下做配置；</p>
+</li>
+<li><p>然后将php.ini中curl扩展配置项开启：</p>
+<p><img src="img/3" alt="1543580961194"></p>
+</li>
+<li><p>将php根目录下的如下四个文件复制一份，拷贝到指定的目录中：</p>
+<p>复制如下文件：</p>
+<p><img src="img/5" alt="1543581112186"></p>
+<p><img src="img/6" alt="1543581125286"></p>
+<p><img src="img/7" alt="1543581140872"></p>
+<p><img src="img/8" alt="1543581152117"></p>
+<p>粘贴到如下phpinfo信息所指定的目录中：</p>
+<p><img src="img/4" alt="1543581085509"></p>
+</li>
+<li><p>重启apache，</p>
+<p><img src="img/9" alt="1543581201310"></p>
+</li>
+<li><p>再次查看phpinfo信息：</p>
+<p><img src="img/10" alt="1543581227143"></p>
+<p>能够见到上图所示的curl扩展配置项，则说明curl扩展开启成功。</p>
+</li>
+</ol>
+<h4 id="3-1-2-使用curl扩展模拟http的get请求"><a href="#3-1-2-使用curl扩展模拟http的get请求" class="headerlink" title="3.1.2 使用curl扩展模拟http的get请求"></a>3.1.2 使用curl扩展模拟http的get请求</h4><p>必备的设置项：</p>
+<pre><code class="php">// 设置请求URL地址
+curl_setopt($ch,CURLOPT_URL,$url);
+// 不获取header头信息
+curl_setopt($ch,CURLOPT_HEADER,0);
+// 结果不直接返回到终端
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+// 设置curl不进行证书的检测
+curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);
+curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);
+</code></pre>
+<p>生产环境推荐的设置项：</p>
+<pre><code class="php">// 超时时间 秒
+curl_setopt($ch,CURLOPT_TIMEOUT,10);
+// 设置请求的浏览器
+curl_setopt($ch,CURLOPT_USERAGENT,&#39;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36&#39;);
+</code></pre>
+<p><strong>==案例：==</strong>实现在访问code/t1.php的同时，在t1.php中利用curl模拟get请求code/t2.php，达到同时输出t1.php和t2.php的内容。</p>
+<p>==实现：==</p>
+<ol>
+<li><p>在day2/code目录下创建t1.php程序文件，内容如下：</p>
+<p><code>`</code>php<br>&lt;?php</p>
+<p>echo ‘t1.php<br>‘;</p>
+<p>//使用curl模拟get请求<br>#1. 初始化curl连接<br>$ch = curl_init();</p>
+<p>//请求的新的链接地址<br>$url = ‘<a href="http://969m2z.natappfree.cc/t2.php?name=小风风&amp;age=18&amp;height=1.9&#39;" target="_blank" rel="noopener">http://969m2z.natappfree.cc/t2.php?name=小风风&amp;age=18&amp;height=1.9&#39;</a>;</p>
+<p>#2. 设置curl选项<br>// 设置请求URL地址<br>curl_setopt($ch,CURLOPT_URL,$url);<br>// 不获取header头信息<br>curl_setopt($ch,CURLOPT_HEADER,0);<br>// 结果不直接返回到终端<br>curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);<br>// 设置curl不进行证书的检测<br>curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);<br>curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);</p>
+<p>// 超时时间 秒<br>curl_setopt($ch,CURLOPT_TIMEOUT,10);<br>// 设置请求的浏览器<br>curl_setopt($ch,CURLOPT_USERAGENT,’Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36’);</p>
+<p>#3. 执行curl<br>$data = curl_exec($ch);</p>
+<p>#4. 关闭curl连接<br>curl_close($ch);</p>
+</li>
+</ol>
+<p>   var_dump($data);</p>
+<p>   echo ‘<hr>‘;</p>
+<p>   echo ‘哈哈哈哈哈，看的到我么？’;</p>
+<pre><code>
+
+
+2. 同时在day2/code目录下创建t2.php文件，代码如下：
+
+   ```php
+   &lt;?php
+
+   echo &#39;t2.php&lt;br/&gt;&#39;;
+
+   var_dump( $_GET ); 
+</code></pre><ol start="3">
+<li><p>测试使用效果：</p>
+<p><img src="img/36" alt="1543656866209"></p>
+</li>
+</ol>
+<h4 id="3-1-3-使用curl扩展模拟http的post请求"><a href="#3-1-3-使用curl扩展模拟http的post请求" class="headerlink" title="3.1.3 使用curl扩展模拟http的post请求"></a>3.1.3 使用curl扩展模拟http的post请求</h4><p>在实现get请求的基础上需要增加的设置项：</p>
+<pre><code class="php">// 发起POST请求
+curl_setopt($ch,CURLOPT_POST,1);
+// post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式
+curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($data));
+</code></pre>
+<p><strong>==案例：==</strong>实现在访问code/t3.php的同时，在t3.php中利用curl模拟post请求code/t4.php，达到同时输出t3.php和t4.php的内容。</p>
+<p>==实现：==</p>
+<ol>
+<li><p>在day3/code目录中创建t3.php文件，代码内容如下：</p>
+<p><code>`</code>php<br>&lt;?php</p>
+<p>echo ‘t3.php<hr>‘;<br>$url = ‘<a href="http://www.home.com/class/day3/code/t4.php&#39;" target="_blank" rel="noopener">http://www.home.com/class/day3/code/t4.php&#39;</a>;</p>
+<p>$arr = [‘name’=&gt;’lisi’, ‘age’=&gt;’18’, ‘acc’=&gt;’xiaosisi’];<br>$arr1 = [‘n1’=&gt;’大锤’, ‘age1’=&gt;’19’, ‘acc2’=&gt;’miantiao’];<br>$arr2 = [‘n2’=&gt;’哪吒’, ‘age2’=&gt;’90’, ‘acc3’=&gt;’xiaonaza’];</p>
+</li>
+</ol>
+<p>   #1. 初始化curl连接<br>   $ch = curl_init();</p>
+<p>   #2. 设置各项参数<br>   // 设置请求URL地址<br>   curl_setopt($ch,CURLOPT_URL,$url);<br>   // 不获取header头信息<br>   curl_setopt($ch,CURLOPT_HEADER,0);<br>   // 结果不直接返回到终端<br>   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);<br>   // 设置curl不进行证书的检测<br>   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);<br>   curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);</p>
+<p>   // 超时时间 秒<br>   curl_setopt($ch,CURLOPT_TIMEOUT,10);<br>   // 设置请求的浏览器<br>   curl_setopt($ch,CURLOPT_USERAGENT,’Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36’);</p>
+<p>   // 发起POST请求<br>   curl_setopt($ch,CURLOPT_POST,1);<br>   // post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式<br>   //                              http_build_query这个函数在单纯传递post数据，注意不包含文件数据的时候，建议加上，否则可能出现传输数据不稳定的情况<br>   curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($arr1));</p>
+<p>   #3. 执行curl连接<br>   $data = curl_exec($ch);</p>
+<p>   var_dump($data);</p>
+<p>   #4. 关闭curl连接<br>   curl_close($ch);</p>
+<pre><code>
+
+
+2. 在day3/code目录下创建t4.php，代码内容如下：
+
+   ```php
+   &lt;?php
+
+   echo &#39;t4.php&lt;br/&gt;&#39;;
+
+   //单纯接收get传递过来的数据
+   echo &#39;GET：&lt;br/&gt;&#39;; 
+   echo &#39;&lt;pre&gt;&#39;;
+   var_dump( $_GET ); 
+   echo &#39;&lt;/pre&gt;&#39;;
+
+   echo &#39;&lt;hr/&gt;&#39;;
+   //单纯接收post方式传递过来的数据
+   echo &#39;POST：&lt;br/&gt;&#39;; 
+   echo &#39;&lt;pre&gt;&#39;;
+   var_dump( $_POST ); 
+   echo &#39;&lt;/pre&gt;&#39;;
+</code></pre><ol start="3">
+<li><p>测试使用浏览器访问t3.php文件，效果为：</p>
+<p><img src="img/11" alt="1543802367841"></p>
+</li>
+</ol>
+<h4 id="3-1-4-使用curl扩展模拟http的post请求实现文件上传"><a href="#3-1-4-使用curl扩展模拟http的post请求实现文件上传" class="headerlink" title="3.1.4 使用curl扩展模拟http的post请求实现文件上传"></a>3.1.4 使用curl扩展模拟http的post请求实现文件上传</h4><p>==条件：==</p>
+<ol>
+<li>需要使用到系统类：CURLFile</li>
+<li>在实现post请求的基础，要==去掉http_build_query==格式化数据；</li>
+</ol>
+<p><strong>==案例：==</strong>实现在访问code/t5.php的同时，在t5.php中利用curl模拟post请求code/t6.php，达到同时输出t5.php和t6.php的内容。</p>
+<p>==实现：==</p>
+<ol>
+<li><p>在day3/code目录下创建code5.php，代码内容如下：</p>
+<p><code>`</code>php<br>&lt;?php</p>
+<p>echo ‘t3.php<hr>‘;<br>$url = ‘<a href="http://www.home.com/class/day3/code/t6.php&#39;" target="_blank" rel="noopener">http://www.home.com/class/day3/code/t6.php&#39;</a>;</p>
+<p>$arr = [‘name’=&gt;’lisi’, ‘age’=&gt;’18’, ‘acc’=&gt;’xiaosisi’];<br>//$arr[‘pic’] = <strong>DIR</strong> . ‘/source/001.jpg’;//需要使用绝对路径<br>//不能够直接将图片的绝对路径直接保存在数组中,通过curl返回来的数据,是个字符串,并不是我们想要的结果<br>$upfile = <strong>DIR</strong> . ‘/source/001.jpg’;<br>$arr[‘pic’] = new CURLFile($upfile);</p>
+<p>//echo ‘<pre>‘;<br>//var_dump( $arr );<br>//echo ‘</pre>‘;<br>//exit;</p>
+</li>
+</ol>
+<p>   #1. 初始化curl连接<br>   $ch = curl_init();</p>
+<p>   #2. 设置各项参数<br>   // 设置请求URL地址<br>   curl_setopt($ch,CURLOPT_URL,$url);<br>   // 不获取header头信息<br>   curl_setopt($ch,CURLOPT_HEADER,0);<br>   // 结果不直接返回到终端<br>   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);<br>   // 设置curl不进行证书的检测<br>   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);<br>   curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);</p>
+<p>   // 超时时间 秒<br>   curl_setopt($ch,CURLOPT_TIMEOUT,10);<br>   // 设置请求的浏览器<br>   curl_setopt($ch,CURLOPT_USERAGENT,’Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36’);</p>
+<p>   // 发起POST请求<br>   curl_setopt($ch,CURLOPT_POST,1);<br>   // post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式<br>   //                              http_build_query这个函数在单纯传递post数据，注意不包含文件数据的时候，建议加上，否则可能出现传输数据不稳定的情况<br>   //curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($arr));<br>   curl_setopt($ch,CURLOPT_POSTFIELDS,$arr);</p>
+<p>   #3. 执行curl连接<br>   $data = curl_exec($ch);</p>
+<p>   var_dump($data);</p>
+<p>   #4. 关闭curl连接<br>   curl_close($ch);</p>
+<pre><code>
+
+
+2. 在day3/code目录下创建code6.php，代码内容如下：
+
+   ```php
+   &lt;?php
+   echo &#39;&lt;pre&gt;&#39;;
+   var_dump( $_POST );
+   echo &#39;&lt;/pre&gt;&#39;;
+
+    echo &#39;&lt;hr/&gt;&#39;;
+
+   echo &#39;&lt;pre&gt;&#39;;
+   var_dump( $_FILES ); 
+   echo &#39;&lt;/pre&gt;&#39;;
+
+   echo &#39;&lt;hr/&gt;&#39;;
+
+   //$newPath = __DIR__ . &#39;/a.jpg&#39;;
+   //$re = move_uploaded_file($_FILES[&#39;pic&#39;][&#39;tmp_name&#39;], $newPath);
+   //var_dump( $re ); 
+</code></pre><ol start="3">
+<li><p>测试使用浏览器访问code5.php，</p>
+<p><img src="img/12" alt="1543805385705"></p>
+</li>
+</ol>
+<h3 id="3-2-获取接口调用凭据access-token并缓存到文件"><a href="#3-2-获取接口调用凭据access-token并缓存到文件" class="headerlink" title="3.2 获取接口调用凭据access_token并缓存到文件"></a>3.2 获取接口调用凭据access_token并缓存到文件</h3><ol>
+<li><p>在day3/code目录中创建一个名为NewWeixin.class.php的文件，代码如下：</p>
+<pre><code class="php">&lt;?php
+
+include &#39;./request.php&#39;;//引入curl函数
+
+class NewWeixin{
+
+    const appID = &#39;wxaf41f8f6458ce525&#39;;//开发者的appid
+    const appsecret = &#39;1d33af2f805b087abd1da6ed7cad5997&#39;;//开发者的加密密钥
+
+    #获取access_token的方法
+    public function getACToken(){ 
+
+        $filePath = __DIR__ . &#39;/&#39; . self::appID . &#39;.txt&#39;;//存储accesstoken的文件
+
+        if( is_file($filePath) &amp;&amp; filemtime($filePath)+7200&gt;time()){//如果存储accesstoken的文件存在并且最后修改时间没有超过2个小时，说明accesstoken还在有效期内
+
+            return file_get_contents($filePath);//那么，直接从文件中读取出accesstoken
+        }
+        //能够执行到这里说明要么文件不存在，要么文件存在但是accesstoken过期了
+
+        //获取access_token的接口
+        $url = &#39;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=%s&amp;secret=%s&#39;;
+        $url = sprintf($url, self::appID, self::appsecret);
+        $json = curl($url);
+        $data = json_decode($json);//因为得到的结果将会是一个json字符串，所以要将这个字符串转换成一个数组
+
+        //将accesstoken覆盖写入进文件
+        file_put_contents($filePath, $data-&gt;access_token);
+
+        //调用curl函数请求接口api
+        return $data-&gt;access_token;
+    }
+}
+
+$obj = new NewWeixin;
+echo $obj-&gt;getACToken();
+</code></pre>
+</li>
+</ol>
+<ol start="2">
+<li><p>测试访问NewWeixin.class.php该文件，效果为：</p>
+<p>得到了access_token的值：</p>
+<p><img src="img/13" alt="1543818910562"><br>同时在code目录下生成了一个存放access_token值的文件，</p>
+<p><img src="img/15" alt="1543818963450"></p>
+</li>
+</ol>
+<h2 id="2-创建自定义菜单"><a href="#2-创建自定义菜单" class="headerlink" title="2. 创建自定义菜单"></a>2. 创建自定义菜单</h2><ol>
+<li><p>在day3/code目录下的NewWeixin.class.php中创建一个名为setMenu的方法，</p>
+<pre><code class="php">&lt;?php
+
+include &#39;./request.php&#39;;//引入curl函数
+
+class NewWeixin{
+
+    const appID = &#39;wxaf41f8f6458ce525&#39;;//开发者的appid
+    const appsecret = &#39;1d33af2f805b087abd1da6ed7cad5997&#39;;//开发者的加密密钥
+
+    #获取access_token的方法
+    public function getACToken(){ 
+
+        $filePath = __DIR__ . &#39;/&#39; . self::appID . &#39;.txt&#39;;//存储accesstoken的文件
+
+        if( is_file($filePath) &amp;&amp; filemtime($filePath)+7200&gt;time()){//如果存储accesstoken的文件存在并且最后修改时间没有超过2个小时，说明accesstoken还在有效期内
+
+            return file_get_contents($filePath);//那么，直接从文件中读取出accesstoken
+        }
+        //能够执行到这里说明要么文件不存在，要么文件存在但是accesstoken过期了
+
+        //获取access_token的接口
+        $url = &#39;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=%s&amp;secret=%s&#39;;
+        $url = sprintf($url, self::appID, self::appsecret);
+        $json = curl($url);
+        $data = json_decode($json);//因为得到的结果将会是一个json字符串，所以要将这个字符串转换成一个数组
+
+        //将accesstoken覆盖写入进文件
+        file_put_contents($filePath, $data-&gt;access_token);
+
+        //调用curl函数请求接口api
+        return $data-&gt;access_token;
+    }
+
+    #生成菜单方法
+    public function setMenu(){ 
+
+        $access_token = $this-&gt;getACToken();//获取accesstoken的值
+        $url = &#39;https://api.weixin.qq.com/cgi-bin/menu/create?access_token=&#39; . $access_token;
+
+        $json = &#39;{
+                         &quot;button&quot;:[
+                         {    
+                              &quot;type&quot;:&quot;click&quot;,
+                              &quot;name&quot;:&quot;今日歌曲1&quot;,
+                              &quot;key&quot;:&quot;a1&quot;
+                          },
+                          {
+                               &quot;name&quot;:&quot;菜单&quot;,
+                               &quot;sub_button&quot;:[
+                               {    
+                                   &quot;type&quot;:&quot;view&quot;,
+                                   &quot;name&quot;:&quot;搜索&quot;,
+                                   &quot;url&quot;:&quot;http://www.baidu.com&quot;
+                                },
+                                {
+                                   &quot;type&quot;:&quot;click&quot;,
+                                   &quot;name&quot;:&quot;赞一下我们&quot;,
+                                   &quot;key&quot;:&quot;a2&quot;
+                                }]
+                           }]
+                     }&#39;;
+
+        return curl($url, $json);
+    }
+}
+
+$obj = new NewWeixin;
+//echo $obj-&gt;getACToken();
+var_dump($obj-&gt;setMenu());//调用设置菜单的方法
+</code></pre>
+</li>
+</ol>
+<ol start="2">
+<li><p>然后请求NewWeixin.class.php文件，生成菜单：</p>
+<p><img src="img/16" alt="1543823426058"></p>
+</li>
+<li><p>如果是第一次生成，则直接看就可以了，如果是第一次以后生成，想立即看到效果，需要先取消关注然后再灌注才能看到效果：</p>
+<p><img src="img/17" alt="1543823483059"></p>
+</li>
+</ol>
+<h2 id="3-删除自定义菜单"><a href="#3-删除自定义菜单" class="headerlink" title="3. 删除自定义菜单"></a>3. 删除自定义菜单</h2><ol>
+<li><p>在day3/code目录下的NewWeixin.class.php中创建一个名为unsetMenu的方法，</p>
+<p><img src="img/18" alt="1543823894707"></p>
+</li>
+<li><p>然后请求NewWeixin.class.php文件，删除菜单：</p>
+<p><img src="img/19" alt="1543823925104"></p>
+</li>
+<li><p>如果要立即看到效果，则需要先取消关注再关注，效果为：</p>
+<p><img src="img/20" alt="1543823952465"></p>
+</li>
+</ol>
+<h2 id="4-素材上传"><a href="#4-素材上传" class="headerlink" title="4. 素材上传"></a>4. 素材上传</h2><p><img src="img/1" alt="1543764371691"></p>
+<h3 id="4-1-上传临时素材"><a href="#4-1-上传临时素材" class="headerlink" title="4.1 上传临时素材"></a>4.1 上传临时素材</h3><ol>
+<li><p>首先创建存储素材信息的数据表：</p>
+<pre><code class="mysql">#db8.wx_source
+
+create table wx_source(
+id int unsigned primary key auto_increment,
+type varchar(30) not null default &#39;&#39; comment &#39;数据文件类型&#39;,
+media_id varchar(255) not null default &#39;&#39; comment &#39;媒体id&#39;,
+create_at int unsigned not null default 0 comment &#39;上传的时间戳&#39;
+);
+</code></pre>
+<p><img src="img/21" alt="1543825024889"></p>
+</li>
+<li><p>在day3/code/NewWeixin.class.php中创建一个名为addSoruce的方法，</p>
+<p><img src="img/22" alt="1543829088256"></p>
+</li>
+<li><p>测试访问该方法，实现上传素材，</p>
+<p><img src="img/23" alt="1543829126345"></p>
+</li>
+<li><p>访问之后效果为：我们的数据表将会新增素材信息数据：</p>
+<p><img src="img/24" alt="1543829175198"></p>
+</li>
+</ol>
+<h3 id="4-2-上传永久素材"><a href="#4-2-上传永久素材" class="headerlink" title="4.2 上传永久素材"></a>4.2 上传永久素材</h3><h2 id="5-全天总结"><a href="#5-全天总结" class="headerlink" title="5. 全天总结"></a>5. 全天总结</h2><ol>
+<li>使用curl获取access_token</li>
+<li>生成自定义菜单</li>
+<li>删除自定义菜单</li>
+<li>上传临时素材</li>
+</ol>
+<p>被动回复：</p>
+<p><img src="img/25" alt="1543830411186"></p>
+<p>主动操作：</p>
+<p><img src="img/26" alt="1543830890051"></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年12月04日 10:00</p>
+        <p>原始链接： <a class="post-url" href="/2018/12/04/微信开发03/" title="微信开发03">http://yoursite.com/2018/12/04/微信开发03/</a></p>
+        <footer>
+            <a href="http://yoursite.com">
+                <img src="/images/logo.png" alt="zhouhw">
+                zhouhw
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/12/04/微信开发03/&title=《微信开发03》 — zhouhw627's blog&pic=http://yoursite.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/12/04/微信开发03/&title=《微信开发03》 — zhouhw627's blog&source=博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/12/04/微信开发03/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《微信开发03》 — zhouhw627's blog&url=http://yoursite.com/2018/12/04/微信开发03/&via=http://yoursite.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/12/04/微信开发03/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/12/04/微信开发03/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/weixin/" class="color2">weixin</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、昨日回顾"><span class="post-toc-text">一、昨日回顾</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-知识回顾"><span class="post-toc-text">1. 知识回顾</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-昨日反馈"><span class="post-toc-text">2. 昨日反馈</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、知识路径"><span class="post-toc-text">二、知识路径</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三、今日课程内容：微信开发03"><span class="post-toc-text">三、今日课程内容：微信开发03</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-接口调用凭据access-token"><span class="post-toc-text">1. 接口调用凭据access_token</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-curl扩展"><span class="post-toc-text">3.1 curl扩展</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-1-windows下开启curl扩展"><span class="post-toc-text">3.1.1 windows下开启curl扩展</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-2-使用curl扩展模拟http的get请求"><span class="post-toc-text">3.1.2 使用curl扩展模拟http的get请求</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-3-使用curl扩展模拟http的post请求"><span class="post-toc-text">3.1.3 使用curl扩展模拟http的post请求</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-4-使用curl扩展模拟http的post请求实现文件上传"><span class="post-toc-text">3.1.4 使用curl扩展模拟http的post请求实现文件上传</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-获取接口调用凭据access-token并缓存到文件"><span class="post-toc-text">3.2 获取接口调用凭据access_token并缓存到文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-创建自定义菜单"><span class="post-toc-text">2. 创建自定义菜单</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-删除自定义菜单"><span class="post-toc-text">3. 删除自定义菜单</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-素材上传"><span class="post-toc-text">4. 素材上传</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-上传临时素材"><span class="post-toc-text">4.1 上传临时素材</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-上传永久素材"><span class="post-toc-text">4.2 上传永久素材</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-全天总结"><span class="post-toc-text">5. 全天总结</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/04/微信开发01/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">微信公众号01</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2018 zhouhw<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://yoursite.com",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/web前端/">web前端</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/weixin/" style="font-size: 10px;">weixin</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/weixin/" style="font-size: 10px;">weixin</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
