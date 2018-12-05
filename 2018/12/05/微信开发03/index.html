@@ -214,100 +214,41 @@
 </li>
 </ol>
 <h4 id="2-1-2-使用curl扩展模拟http的get请求"><a href="#2-1-2-使用curl扩展模拟http的get请求" class="headerlink" title="2.1.2 使用curl扩展模拟http的get请求"></a>2.1.2 使用curl扩展模拟http的get请求</h4><p>必备的设置项：</p>
-<pre><code class="php">// 设置请求URL地址
-curl_setopt($ch,CURLOPT_URL,$url);
-// 不获取header头信息
-curl_setopt($ch,CURLOPT_HEADER,0);
-// 结果不直接返回到终端
-curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-// 设置curl不进行证书的检测
-curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);
-curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);
-</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置请求URL地址</span></span><br><span class="line">curl_setopt($ch,CURLOPT_URL,$url);</span><br><span class="line"><span class="comment">// 不获取header头信息</span></span><br><span class="line">curl_setopt($ch,CURLOPT_HEADER,<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 结果不直接返回到终端</span></span><br><span class="line">curl_setopt($ch,CURLOPT_RETURNTRANSFER,<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 设置curl不进行证书的检测</span></span><br><span class="line">curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,<span class="number">0</span>);</span><br><span class="line">curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 <p>生产环境推荐的设置项：</p>
-<pre><code class="php">// 超时时间 秒
-curl_setopt($ch,CURLOPT_TIMEOUT,10);
-// 设置请求的浏览器
-curl_setopt($ch,CURLOPT_USERAGENT,&#39;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36&#39;);
-</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 超时时间 秒</span></span><br><span class="line">curl_setopt($ch,CURLOPT_TIMEOUT,<span class="number">10</span>);</span><br><span class="line"><span class="comment">// 设置请求的浏览器</span></span><br><span class="line">curl_setopt($ch,CURLOPT_USERAGENT,<span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'</span>);</span><br></pre></td></tr></table></figure>
 <p><strong>==案例：==</strong>实现在访问code/t1.php的同时，在t1.php中利用curl模拟get请求code/t2.php，达到同时输出t1.php和t2.php的内容。</p>
 <p>==实现：==</p>
 <ol>
 <li><p>在day2/code目录下创建t1.php程序文件，内容如下：</p>
-<p><code>`</code>php<br>&lt;?php</p>
-<p>echo ‘t1.php<br>‘;</p>
-<p>//使用curl模拟get请求<br>#1. 初始化curl连接<br>$ch = curl_init();</p>
-<p>//请求的新的链接地址<br>$url = ‘<a href="http://969m2z.natappfree.cc/t2.php?name=小风风&amp;age=18&amp;height=1.9&#39;" target="_blank" rel="noopener">http://969m2z.natappfree.cc/t2.php?name=小风风&amp;age=18&amp;height=1.9&#39;</a>;</p>
-<p>#2. 设置curl选项<br>// 设置请求URL地址<br>curl_setopt($ch,CURLOPT_URL,$url);<br>// 不获取header头信息<br>curl_setopt($ch,CURLOPT_HEADER,0);<br>// 结果不直接返回到终端<br>curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);<br>// 设置curl不进行证书的检测<br>curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);<br>curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);</p>
-<p>// 超时时间 秒<br>curl_setopt($ch,CURLOPT_TIMEOUT,10);<br>// 设置请求的浏览器<br>curl_setopt($ch,CURLOPT_USERAGENT,’Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36’);</p>
-<p>#3. 执行curl<br>$data = curl_exec($ch);</p>
-<p>#4. 关闭curl连接<br>curl_close($ch);</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'t1.php&lt;br/&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用curl模拟get请求</span></span><br><span class="line"><span class="comment">#1. 初始化curl连接</span></span><br><span class="line">$ch = curl_init();</span><br><span class="line"></span><br><span class="line"><span class="comment">//请求的新的链接地址</span></span><br><span class="line">$url = <span class="string">'http://969m2z.natappfree.cc/t2.php?name=小风风&amp;age=18&amp;height=1.9'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 设置curl选项</span></span><br><span class="line"><span class="comment">// 设置请求URL地址</span></span><br><span class="line">curl_setopt($ch,CURLOPT_URL,$url);</span><br><span class="line"><span class="comment">// 不获取header头信息</span></span><br><span class="line">curl_setopt($ch,CURLOPT_HEADER,<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 结果不直接返回到终端</span></span><br><span class="line">curl_setopt($ch,CURLOPT_RETURNTRANSFER,<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 设置curl不进行证书的检测</span></span><br><span class="line">curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,<span class="number">0</span>);</span><br><span class="line">curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 超时时间 秒</span></span><br><span class="line">curl_setopt($ch,CURLOPT_TIMEOUT,<span class="number">10</span>);</span><br><span class="line"><span class="comment">// 设置请求的浏览器</span></span><br><span class="line">curl_setopt($ch,CURLOPT_USERAGENT,<span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#3. 执行curl</span></span><br><span class="line">$data = curl_exec($ch);</span><br><span class="line"></span><br><span class="line"><span class="comment">#4. 关闭curl连接</span></span><br><span class="line">curl_close($ch);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var_dump($data);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;hr/&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'哈哈哈哈哈，看的到我么？'</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>   var_dump($data);</p>
-<p>   echo ‘<hr>‘;</p>
-<p>   echo ‘哈哈哈哈哈，看的到我么？’;</p>
-<pre><code>
-
-
-2. 同时在day2/code目录下创建t2.php文件，代码如下：
-
-   ```php
-   &lt;?php
-
-   echo &#39;t2.php&lt;br/&gt;&#39;;
-
-   var_dump( $_GET ); 
-</code></pre><ol start="3">
+<ol start="2">
+<li><p>同时在day2/code目录下创建t2.php文件，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'t2.php&lt;br/&gt;'</span>;</span><br><span class="line"></span><br><span class="line">var_dump( $_GET );</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
 <li><p>测试使用效果：</p>
 <p><img src="/2018/12/05/微信开发03/36" alt="1543656866209"></p>
 </li>
 </ol>
 <h4 id="2-1-3-使用curl扩展模拟http的post请求"><a href="#2-1-3-使用curl扩展模拟http的post请求" class="headerlink" title="2.1.3 使用curl扩展模拟http的post请求"></a>2.1.3 使用curl扩展模拟http的post请求</h4><p>在实现get请求的基础上需要增加的设置项：</p>
-<pre><code class="php">// 发起POST请求
-curl_setopt($ch,CURLOPT_POST,1);
-// post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式
-curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($data));
-</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发起POST请求</span></span><br><span class="line">curl_setopt($ch,CURLOPT_POST,<span class="number">1</span>);</span><br><span class="line"><span class="comment">// post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式</span></span><br><span class="line">curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($data));</span><br></pre></td></tr></table></figure>
 <p><strong>==案例：==</strong>实现在访问code/t3.php的同时，在t3.php中利用curl模拟post请求code/t4.php，达到同时输出t3.php和t4.php的内容。</p>
 <p>==实现：==</p>
 <ol>
 <li><p>在day3/code目录中创建t3.php文件，代码内容如下：</p>
-<p><code>`</code>php<br>&lt;?php</p>
-<p>echo ‘t3.php<hr>‘;<br>$url = ‘<a href="http://www.home.com/class/day3/code/t4.php&#39;" target="_blank" rel="noopener">http://www.home.com/class/day3/code/t4.php&#39;</a>;</p>
-<p>$arr = [‘name’=&gt;’lisi’, ‘age’=&gt;’18’, ‘acc’=&gt;’xiaosisi’];<br>$arr1 = [‘n1’=&gt;’大锤’, ‘age1’=&gt;’19’, ‘acc2’=&gt;’miantiao’];<br>$arr2 = [‘n2’=&gt;’哪吒’, ‘age2’=&gt;’90’, ‘acc3’=&gt;’xiaonaza’];</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'t3.php&lt;hr/&gt;'</span>;</span><br><span class="line">$url = <span class="string">'http://www.home.com/class/day3/code/t4.php'</span>;</span><br><span class="line"></span><br><span class="line">$arr = [<span class="string">'name'</span>=&gt;<span class="string">'lisi'</span>, <span class="string">'age'</span>=&gt;<span class="string">'18'</span>, <span class="string">'acc'</span>=&gt;<span class="string">'xiaosisi'</span>];</span><br><span class="line">$arr1 = [<span class="string">'n1'</span>=&gt;<span class="string">'大锤'</span>, <span class="string">'age1'</span>=&gt;<span class="string">'19'</span>, <span class="string">'acc2'</span>=&gt;<span class="string">'miantiao'</span>];</span><br><span class="line">$arr2 = [<span class="string">'n2'</span>=&gt;<span class="string">'哪吒'</span>, <span class="string">'age2'</span>=&gt;<span class="string">'90'</span>, <span class="string">'acc3'</span>=&gt;<span class="string">'xiaonaza'</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#1. 初始化curl连接</span></span><br><span class="line">$ch = curl_init();</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 设置各项参数</span></span><br><span class="line"><span class="comment">// 设置请求URL地址</span></span><br><span class="line">curl_setopt($ch,CURLOPT_URL,$url);</span><br><span class="line"><span class="comment">// 不获取header头信息</span></span><br><span class="line">curl_setopt($ch,CURLOPT_HEADER,<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 结果不直接返回到终端</span></span><br><span class="line">curl_setopt($ch,CURLOPT_RETURNTRANSFER,<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 设置curl不进行证书的检测</span></span><br><span class="line">curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,<span class="number">0</span>);</span><br><span class="line">curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 超时时间 秒</span></span><br><span class="line">curl_setopt($ch,CURLOPT_TIMEOUT,<span class="number">10</span>);</span><br><span class="line"><span class="comment">// 设置请求的浏览器</span></span><br><span class="line">curl_setopt($ch,CURLOPT_USERAGENT,<span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发起POST请求</span></span><br><span class="line">curl_setopt($ch,CURLOPT_POST,<span class="number">1</span>);</span><br><span class="line"><span class="comment">// post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式</span></span><br><span class="line"><span class="comment">//                              http_build_query这个函数在单纯传递post数据，注意不包含文件数据的时候，建议加上，否则可能出现传输数据不稳定的情况</span></span><br><span class="line">curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($arr1));</span><br><span class="line"></span><br><span class="line"><span class="comment">#3. 执行curl连接</span></span><br><span class="line">$data = curl_exec($ch);</span><br><span class="line"></span><br><span class="line">var_dump($data);</span><br><span class="line"></span><br><span class="line"><span class="comment">#4. 关闭curl连接</span></span><br><span class="line">curl_close($ch);</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>   #1. 初始化curl连接<br>   $ch = curl_init();</p>
-<p>   #2. 设置各项参数<br>   // 设置请求URL地址<br>   curl_setopt($ch,CURLOPT_URL,$url);<br>   // 不获取header头信息<br>   curl_setopt($ch,CURLOPT_HEADER,0);<br>   // 结果不直接返回到终端<br>   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);<br>   // 设置curl不进行证书的检测<br>   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);<br>   curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);</p>
-<p>   // 超时时间 秒<br>   curl_setopt($ch,CURLOPT_TIMEOUT,10);<br>   // 设置请求的浏览器<br>   curl_setopt($ch,CURLOPT_USERAGENT,’Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36’);</p>
-<p>   // 发起POST请求<br>   curl_setopt($ch,CURLOPT_POST,1);<br>   // post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式<br>   //                              http_build_query这个函数在单纯传递post数据，注意不包含文件数据的时候，建议加上，否则可能出现传输数据不稳定的情况<br>   curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($arr1));</p>
-<p>   #3. 执行curl连接<br>   $data = curl_exec($ch);</p>
-<p>   var_dump($data);</p>
-<p>   #4. 关闭curl连接<br>   curl_close($ch);</p>
-<pre><code>
-
-
-2. 在day3/code目录下创建t4.php，代码内容如下：
-
-   ```php
-   &lt;?php
-
-   echo &#39;t4.php&lt;br/&gt;&#39;;
-
-   //单纯接收get传递过来的数据
-   echo &#39;GET：&lt;br/&gt;&#39;; 
-   echo &#39;&lt;pre&gt;&#39;;
-   var_dump( $_GET ); 
-   echo &#39;&lt;/pre&gt;&#39;;
-
-   echo &#39;&lt;hr/&gt;&#39;;
-   //单纯接收post方式传递过来的数据
-   echo &#39;POST：&lt;br/&gt;&#39;; 
-   echo &#39;&lt;pre&gt;&#39;;
-   var_dump( $_POST ); 
-   echo &#39;&lt;/pre&gt;&#39;;
-</code></pre><ol start="3">
+<ol start="2">
+<li><p>在day3/code目录下创建t4.php，代码内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'t4.php&lt;br/&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//单纯接收get传递过来的数据</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'GET：&lt;br/&gt;'</span>; </span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line">var_dump( $_GET ); </span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;hr/&gt;'</span>;</span><br><span class="line"><span class="comment">//单纯接收post方式传递过来的数据</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'POST：&lt;br/&gt;'</span>; </span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line">var_dump( $_POST ); </span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
 <li><p>测试使用浏览器访问t3.php文件，效果为：</p>
 <p><img src="/2018/12/05/微信开发03/11" alt="1543802367841"></p>
 </li>
@@ -321,85 +262,22 @@ curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($data));
 <p>==实现：==</p>
 <ol>
 <li><p>在day3/code目录下创建code5.php，代码内容如下：</p>
-<p><code>`</code>php<br>&lt;?php</p>
-<p>echo ‘t3.php<hr>‘;<br>$url = ‘<a href="http://www.home.com/class/day3/code/t6.php&#39;" target="_blank" rel="noopener">http://www.home.com/class/day3/code/t6.php&#39;</a>;</p>
-<p>$arr = [‘name’=&gt;’lisi’, ‘age’=&gt;’18’, ‘acc’=&gt;’xiaosisi’];<br>//$arr[‘pic’] = <strong>DIR</strong> . ‘/source/001.jpg’;//需要使用绝对路径<br>//不能够直接将图片的绝对路径直接保存在数组中,通过curl返回来的数据,是个字符串,并不是我们想要的结果<br>$upfile = <strong>DIR</strong> . ‘/source/001.jpg’;<br>$arr[‘pic’] = new CURLFile($upfile);</p>
-<p>//echo ‘<pre>‘;<br>//var_dump( $arr );<br>//echo ‘</pre>‘;<br>//exit;</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'t3.php&lt;hr/&gt;'</span>;</span><br><span class="line">$url = <span class="string">'http://www.home.com/class/day3/code/t6.php'</span>;</span><br><span class="line"></span><br><span class="line">$arr = [<span class="string">'name'</span>=&gt;<span class="string">'lisi'</span>, <span class="string">'age'</span>=&gt;<span class="string">'18'</span>, <span class="string">'acc'</span>=&gt;<span class="string">'xiaosisi'</span>];</span><br><span class="line"><span class="comment">//$arr['pic'] = __DIR__ . '/source/001.jpg';//需要使用绝对路径</span></span><br><span class="line"><span class="comment">//不能够直接将图片的绝对路径直接保存在数组中,通过curl返回来的数据,是个字符串,并不是我们想要的结果</span></span><br><span class="line">$upfile = <span class="keyword">__DIR__</span> . <span class="string">'/source/001.jpg'</span>;</span><br><span class="line">$arr[<span class="string">'pic'</span>] = <span class="keyword">new</span> CURLFile($upfile);</span><br><span class="line"></span><br><span class="line"><span class="comment">//echo '&lt;pre&gt;';</span></span><br><span class="line"><span class="comment">//var_dump( $arr ); </span></span><br><span class="line"><span class="comment">//echo '&lt;/pre&gt;';</span></span><br><span class="line"><span class="comment">//exit;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#1. 初始化curl连接</span></span><br><span class="line">$ch = curl_init();</span><br><span class="line"></span><br><span class="line"><span class="comment">#2. 设置各项参数</span></span><br><span class="line"><span class="comment">// 设置请求URL地址</span></span><br><span class="line">curl_setopt($ch,CURLOPT_URL,$url);</span><br><span class="line"><span class="comment">// 不获取header头信息</span></span><br><span class="line">curl_setopt($ch,CURLOPT_HEADER,<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 结果不直接返回到终端</span></span><br><span class="line">curl_setopt($ch,CURLOPT_RETURNTRANSFER,<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 设置curl不进行证书的检测</span></span><br><span class="line">curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,<span class="number">0</span>);</span><br><span class="line">curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 超时时间 秒</span></span><br><span class="line">curl_setopt($ch,CURLOPT_TIMEOUT,<span class="number">10</span>);</span><br><span class="line"><span class="comment">// 设置请求的浏览器</span></span><br><span class="line">curl_setopt($ch,CURLOPT_USERAGENT,<span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发起POST请求</span></span><br><span class="line">curl_setopt($ch,CURLOPT_POST,<span class="number">1</span>);</span><br><span class="line"><span class="comment">// post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式</span></span><br><span class="line"><span class="comment">//                              http_build_query这个函数在单纯传递post数据，注意不包含文件数据的时候，建议加上，否则可能出现传输数据不稳定的情况</span></span><br><span class="line"><span class="comment">//curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($arr));</span></span><br><span class="line">curl_setopt($ch,CURLOPT_POSTFIELDS,$arr);</span><br><span class="line"></span><br><span class="line"><span class="comment">#3. 执行curl连接</span></span><br><span class="line">$data = curl_exec($ch);</span><br><span class="line"></span><br><span class="line">var_dump($data);</span><br><span class="line"></span><br><span class="line"><span class="comment">#4. 关闭curl连接</span></span><br><span class="line">curl_close($ch);</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>   #1. 初始化curl连接<br>   $ch = curl_init();</p>
-<p>   #2. 设置各项参数<br>   // 设置请求URL地址<br>   curl_setopt($ch,CURLOPT_URL,$url);<br>   // 不获取header头信息<br>   curl_setopt($ch,CURLOPT_HEADER,0);<br>   // 结果不直接返回到终端<br>   curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);<br>   // 设置curl不进行证书的检测<br>   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);<br>   curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);</p>
-<p>   // 超时时间 秒<br>   curl_setopt($ch,CURLOPT_TIMEOUT,10);<br>   // 设置请求的浏览器<br>   curl_setopt($ch,CURLOPT_USERAGENT,’Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36’);</p>
-<p>   // 发起POST请求<br>   curl_setopt($ch,CURLOPT_POST,1);<br>   // post发送的数据，注意http_build_query可以将$data数组数据格式化成http传输数据的格式<br>   //                              http_build_query这个函数在单纯传递post数据，注意不包含文件数据的时候，建议加上，否则可能出现传输数据不稳定的情况<br>   //curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($arr));<br>   curl_setopt($ch,CURLOPT_POSTFIELDS,$arr);</p>
-<p>   #3. 执行curl连接<br>   $data = curl_exec($ch);</p>
-<p>   var_dump($data);</p>
-<p>   #4. 关闭curl连接<br>   curl_close($ch);</p>
-<pre><code>
-
-
-2. 在day3/code目录下创建code6.php，代码内容如下：
-
-   ```php
-   &lt;?php
-   echo &#39;&lt;pre&gt;&#39;;
-   var_dump( $_POST );
-   echo &#39;&lt;/pre&gt;&#39;;
-
-    echo &#39;&lt;hr/&gt;&#39;;
-
-   echo &#39;&lt;pre&gt;&#39;;
-   var_dump( $_FILES ); 
-   echo &#39;&lt;/pre&gt;&#39;;
-
-   echo &#39;&lt;hr/&gt;&#39;;
-
-   //$newPath = __DIR__ . &#39;/a.jpg&#39;;
-   //$re = move_uploaded_file($_FILES[&#39;pic&#39;][&#39;tmp_name&#39;], $newPath);
-   //var_dump( $re ); 
-</code></pre><ol start="3">
+<ol start="2">
+<li><p>在day3/code目录下创建code6.php，代码内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line">var_dump( $_POST );</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">echo</span> <span class="string">'&lt;hr/&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line">var_dump( $_FILES ); </span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;hr/&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//$newPath = __DIR__ . '/a.jpg';</span></span><br><span class="line"><span class="comment">//$re = move_uploaded_file($_FILES['pic']['tmp_name'], $newPath);</span></span><br><span class="line"><span class="comment">//var_dump( $re );</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
 <li><p>测试使用浏览器访问code5.php，</p>
 <p><img src="/2018/12/05/微信开发03/12" alt="1543805385705"></p>
 </li>
 </ol>
 <h3 id="2-2-获取接口调用凭据access-token并缓存到文件"><a href="#2-2-获取接口调用凭据access-token并缓存到文件" class="headerlink" title="2.2 获取接口调用凭据access_token并缓存到文件"></a>2.2 获取接口调用凭据access_token并缓存到文件</h3><ol>
 <li><p>在day3/code目录中创建一个名为NewWeixin.class.php的文件，代码如下：</p>
-<pre><code class="php">&lt;?php
-
-include &#39;./request.php&#39;;//引入curl函数
-
-class NewWeixin{
-
-    const appID = &#39;wxaf41f8f6458ce525&#39;;//开发者的appid
-    const appsecret = &#39;1d33af2f805b087abd1da6ed7cad5997&#39;;//开发者的加密密钥
-
-    #获取access_token的方法
-    public function getACToken(){ 
-
-        $filePath = __DIR__ . &#39;/&#39; . self::appID . &#39;.txt&#39;;//存储accesstoken的文件
-
-        if( is_file($filePath) &amp;&amp; filemtime($filePath)+7200&gt;time()){//如果存储accesstoken的文件存在并且最后修改时间没有超过2个小时，说明accesstoken还在有效期内
-
-            return file_get_contents($filePath);//那么，直接从文件中读取出accesstoken
-        }
-        //能够执行到这里说明要么文件不存在，要么文件存在但是accesstoken过期了
-
-        //获取access_token的接口
-        $url = &#39;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=%s&amp;secret=%s&#39;;
-        $url = sprintf($url, self::appID, self::appsecret);
-        $json = curl($url);
-        $data = json_decode($json);//因为得到的结果将会是一个json字符串，所以要将这个字符串转换成一个数组
-
-        //将accesstoken覆盖写入进文件
-        file_put_contents($filePath, $data-&gt;access_token);
-
-        //调用curl函数请求接口api
-        return $data-&gt;access_token;
-    }
-}
-
-$obj = new NewWeixin;
-echo $obj-&gt;getACToken();
-</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">'./request.php'</span>;<span class="comment">//引入curl函数</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewWeixin</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> appID = <span class="string">'wxaf41f8f6458ce525'</span>;<span class="comment">//开发者的appid</span></span><br><span class="line">    <span class="keyword">const</span> appsecret = <span class="string">'1d33af2f805b087abd1da6ed7cad5997'</span>;<span class="comment">//开发者的加密密钥</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#获取access_token的方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getACToken</span><span class="params">()</span></span>&#123; </span><br><span class="line"></span><br><span class="line">        $filePath = <span class="keyword">__DIR__</span> . <span class="string">'/'</span> . <span class="keyword">self</span>::appID . <span class="string">'.txt'</span>;<span class="comment">//存储accesstoken的文件</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( is_file($filePath) &amp;&amp; filemtime($filePath)+<span class="number">7200</span>&gt;time())&#123;<span class="comment">//如果存储accesstoken的文件存在并且最后修改时间没有超过2个小时，说明accesstoken还在有效期内</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> file_get_contents($filePath);<span class="comment">//那么，直接从文件中读取出accesstoken</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//能够执行到这里说明要么文件不存在，要么文件存在但是accesstoken过期了</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取access_token的接口</span></span><br><span class="line">        $url = <span class="string">'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=%s&amp;secret=%s'</span>;</span><br><span class="line">        $url = sprintf($url, <span class="keyword">self</span>::appID, <span class="keyword">self</span>::appsecret);</span><br><span class="line">        $json = curl($url);</span><br><span class="line">        $data = json_decode($json);<span class="comment">//因为得到的结果将会是一个json字符串，所以要将这个字符串转换成一个数组</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//将accesstoken覆盖写入进文件</span></span><br><span class="line">        file_put_contents($filePath, $data-&gt;access_token);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用curl函数请求接口api</span></span><br><span class="line">        <span class="keyword">return</span> $data-&gt;access_token;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$obj = <span class="keyword">new</span> NewWeixin;</span><br><span class="line"><span class="keyword">echo</span> $obj-&gt;getACToken();</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol start="2">
@@ -411,76 +289,7 @@ echo $obj-&gt;getACToken();
 </ol>
 <h2 id="2-创建自定义菜单"><a href="#2-创建自定义菜单" class="headerlink" title="2. 创建自定义菜单"></a>2. 创建自定义菜单</h2><ol>
 <li><p>在day3/code目录下的NewWeixin.class.php中创建一个名为setMenu的方法，</p>
-<pre><code class="php">&lt;?php
-
-include &#39;./request.php&#39;;//引入curl函数
-
-class NewWeixin{
-
-    const appID = &#39;wxaf41f8f6458ce525&#39;;//开发者的appid
-    const appsecret = &#39;1d33af2f805b087abd1da6ed7cad5997&#39;;//开发者的加密密钥
-
-    #获取access_token的方法
-    public function getACToken(){ 
-
-        $filePath = __DIR__ . &#39;/&#39; . self::appID . &#39;.txt&#39;;//存储accesstoken的文件
-
-        if( is_file($filePath) &amp;&amp; filemtime($filePath)+7200&gt;time()){//如果存储accesstoken的文件存在并且最后修改时间没有超过2个小时，说明accesstoken还在有效期内
-
-            return file_get_contents($filePath);//那么，直接从文件中读取出accesstoken
-        }
-        //能够执行到这里说明要么文件不存在，要么文件存在但是accesstoken过期了
-
-        //获取access_token的接口
-        $url = &#39;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=%s&amp;secret=%s&#39;;
-        $url = sprintf($url, self::appID, self::appsecret);
-        $json = curl($url);
-        $data = json_decode($json);//因为得到的结果将会是一个json字符串，所以要将这个字符串转换成一个数组
-
-        //将accesstoken覆盖写入进文件
-        file_put_contents($filePath, $data-&gt;access_token);
-
-        //调用curl函数请求接口api
-        return $data-&gt;access_token;
-    }
-
-    #生成菜单方法
-    public function setMenu(){ 
-
-        $access_token = $this-&gt;getACToken();//获取accesstoken的值
-        $url = &#39;https://api.weixin.qq.com/cgi-bin/menu/create?access_token=&#39; . $access_token;
-
-        $json = &#39;{
-                         &quot;button&quot;:[
-                         {    
-                              &quot;type&quot;:&quot;click&quot;,
-                              &quot;name&quot;:&quot;今日歌曲1&quot;,
-                              &quot;key&quot;:&quot;a1&quot;
-                          },
-                          {
-                               &quot;name&quot;:&quot;菜单&quot;,
-                               &quot;sub_button&quot;:[
-                               {    
-                                   &quot;type&quot;:&quot;view&quot;,
-                                   &quot;name&quot;:&quot;搜索&quot;,
-                                   &quot;url&quot;:&quot;http://www.baidu.com&quot;
-                                },
-                                {
-                                   &quot;type&quot;:&quot;click&quot;,
-                                   &quot;name&quot;:&quot;赞一下我们&quot;,
-                                   &quot;key&quot;:&quot;a2&quot;
-                                }]
-                           }]
-                     }&#39;;
-
-        return curl($url, $json);
-    }
-}
-
-$obj = new NewWeixin;
-//echo $obj-&gt;getACToken();
-var_dump($obj-&gt;setMenu());//调用设置菜单的方法
-</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">'./request.php'</span>;<span class="comment">//引入curl函数</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewWeixin</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> appID = <span class="string">'wxaf41f8f6458ce525'</span>;<span class="comment">//开发者的appid</span></span><br><span class="line">    <span class="keyword">const</span> appsecret = <span class="string">'1d33af2f805b087abd1da6ed7cad5997'</span>;<span class="comment">//开发者的加密密钥</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#获取access_token的方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getACToken</span><span class="params">()</span></span>&#123; </span><br><span class="line"></span><br><span class="line">        $filePath = <span class="keyword">__DIR__</span> . <span class="string">'/'</span> . <span class="keyword">self</span>::appID . <span class="string">'.txt'</span>;<span class="comment">//存储accesstoken的文件</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( is_file($filePath) &amp;&amp; filemtime($filePath)+<span class="number">7200</span>&gt;time())&#123;<span class="comment">//如果存储accesstoken的文件存在并且最后修改时间没有超过2个小时，说明accesstoken还在有效期内</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> file_get_contents($filePath);<span class="comment">//那么，直接从文件中读取出accesstoken</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//能够执行到这里说明要么文件不存在，要么文件存在但是accesstoken过期了</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取access_token的接口</span></span><br><span class="line">        $url = <span class="string">'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=%s&amp;secret=%s'</span>;</span><br><span class="line">        $url = sprintf($url, <span class="keyword">self</span>::appID, <span class="keyword">self</span>::appsecret);</span><br><span class="line">        $json = curl($url);</span><br><span class="line">        $data = json_decode($json);<span class="comment">//因为得到的结果将会是一个json字符串，所以要将这个字符串转换成一个数组</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//将accesstoken覆盖写入进文件</span></span><br><span class="line">        file_put_contents($filePath, $data-&gt;access_token);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用curl函数请求接口api</span></span><br><span class="line">        <span class="keyword">return</span> $data-&gt;access_token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#生成菜单方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setMenu</span><span class="params">()</span></span>&#123; </span><br><span class="line">        </span><br><span class="line">        $access_token = <span class="keyword">$this</span>-&gt;getACToken();<span class="comment">//获取accesstoken的值</span></span><br><span class="line">        $url = <span class="string">'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='</span> . $access_token;</span><br><span class="line"></span><br><span class="line">        $json = <span class="string">'&#123;</span></span><br><span class="line"><span class="string">                         "button":[</span></span><br><span class="line"><span class="string">                         &#123;    </span></span><br><span class="line"><span class="string">                              "type":"click",</span></span><br><span class="line"><span class="string">                              "name":"今日歌曲1",</span></span><br><span class="line"><span class="string">                              "key":"a1"</span></span><br><span class="line"><span class="string">                          &#125;,</span></span><br><span class="line"><span class="string">                          &#123;</span></span><br><span class="line"><span class="string">                               "name":"菜单",</span></span><br><span class="line"><span class="string">                               "sub_button":[</span></span><br><span class="line"><span class="string">                               &#123;    </span></span><br><span class="line"><span class="string">                                   "type":"view",</span></span><br><span class="line"><span class="string">                                   "name":"搜索",</span></span><br><span class="line"><span class="string">                                   "url":"http://www.baidu.com"</span></span><br><span class="line"><span class="string">                                &#125;,</span></span><br><span class="line"><span class="string">                                &#123;</span></span><br><span class="line"><span class="string">                                   "type":"click",</span></span><br><span class="line"><span class="string">                                   "name":"赞一下我们",</span></span><br><span class="line"><span class="string">                                   "key":"a2"</span></span><br><span class="line"><span class="string">                                &#125;]</span></span><br><span class="line"><span class="string">                           &#125;]</span></span><br><span class="line"><span class="string">                     &#125;'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> curl($url, $json);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$obj = <span class="keyword">new</span> NewWeixin;</span><br><span class="line"><span class="comment">//echo $obj-&gt;getACToken();</span></span><br><span class="line">var_dump($obj-&gt;setMenu());<span class="comment">//调用设置菜单的方法</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol start="2">
@@ -505,15 +314,7 @@ var_dump($obj-&gt;setMenu());//调用设置菜单的方法
 <h1 id="三、-素材上传"><a href="#三、-素材上传" class="headerlink" title="三、 素材上传"></a>三、 素材上传</h1><p><img src="/2018/12/05/微信开发03/1" alt="1543764371691"></p>
 <h3 id="3-1-上传临时素材"><a href="#3-1-上传临时素材" class="headerlink" title="3.1 上传临时素材"></a>3.1 上传临时素材</h3><ol>
 <li><p>首先创建存储素材信息的数据表：</p>
-<pre><code class="mysql">#db8.wx_source
-
-create table wx_source(
-id int unsigned primary key auto_increment,
-type varchar(30) not null default &#39;&#39; comment &#39;数据文件类型&#39;,
-media_id varchar(255) not null default &#39;&#39; comment &#39;媒体id&#39;,
-create_at int unsigned not null default 0 comment &#39;上传的时间戳&#39;
-);
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#db8.wx_source</span><br><span class="line"></span><br><span class="line">create table wx_source(</span><br><span class="line">id int unsigned primary key auto_increment,</span><br><span class="line">type varchar(30) not null default &apos;&apos; comment &apos;数据文件类型&apos;,</span><br><span class="line">media_id varchar(255) not null default &apos;&apos; comment &apos;媒体id&apos;,</span><br><span class="line">create_at int unsigned not null default 0 comment &apos;上传的时间戳&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p><img src="/2018/12/05/微信开发03/21" alt="1543825024889"></p>
 </li>
 <li><p>在day3/code/NewWeixin.class.php中创建一个名为addSoruce的方法，</p>

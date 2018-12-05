@@ -189,284 +189,48 @@
 <li><p>下载 <a href="https://github.com/shenliyang/hexo-theme-snippet" target="_blank" rel="noopener">Snippet主题</a> 文件解压后放在 <code>themes</code> 目录下，和博客中的landscape为同级目录</p>
 </li>
 <li><p>Git方式，在Hexo根目录执行：</p>
-<pre><code class="bash">git clone git://github.com/shenliyang/hexo-theme-snippet.git themes/hexo-theme-snippet
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git://github.com/shenliyang/hexo-theme-snippet.git themes/hexo-theme-snippet</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="3-安装主题插件"><a href="#3-安装主题插件" class="headerlink" title="3. 安装主题插件"></a>3. 安装主题插件</h3><p>因为 <strong>hexo-theme-snippet</strong> 使用了 <code>ejs</code> 模版引擎 、 <code>Less</code> CSS预编译语言以及在官方插件的基础上<br>进行功能的开发，以下为必装插件：</p>
-<pre><code class="bash">npm i hexo-renderer-ejs hexo-renderer-less hexo-deployer-git -S
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-ejs hexo-renderer-less hexo-deployer-git -S</span><br></pre></td></tr></table></figure>
 <h3 id="4-部署主题"><a href="#4-部署主题" class="headerlink" title="4. 部署主题"></a>4. 部署主题</h3><blockquote>
 <p>如果没有更改过主题源文件,也不需要代码优化可以跳过1,2,3步骤</p>
 </blockquote>
 <ol>
 <li><p>gulp打包构建，拷贝主题目录下<code>package.json</code>文件到Hexo根目录下，然后安装项目的开发依赖。  <a href="http://www.gulpjs.com.cn/docs/getting-started/" target="_blank" rel="noopener">Gulp入门指南</a></p>
-<pre><code class="bash">npm i   //安装项目依赖
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i   //安装项目依赖</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在Hexo根目录下创建一个名为 gulpfile.js 的文件：</p>
-<pre><code class="bash">require(&#39;./themes/hexo-theme-snippet/gulpfile&#39;);
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require(<span class="string">'./themes/hexo-theme-snippet/gulpfile'</span>);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>运行 gulp：</p>
-<pre><code class="bash">gulp 或者 gulp default   //执行打包任务
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp 或者 gulp default   //执行打包任务</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>清空hexo静态文件和缓存，并重新生成</p>
-<pre><code class="bash">hexo clean &amp;&amp; hexo g  //清空缓存并生成静态文件
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g  //清空缓存并生成静态文件</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>本地预览，确没有问题再进行发布</p>
-<pre><code class="bash">hexo s -p 4000 或者 hexo s  //启动本地服务默认
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s -p 4000 或者 hexo s  //启动本地服务默认</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>当gulp执行完成，并提示  <code>please execute： hexo d</code> 时，可以进行发布</p>
-<pre><code class="bash">hexo d 或者 gulp deploy  //部署发布
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d 或者 gulp deploy  //部署发布</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="5-更新主题"><a href="#5-更新主题" class="headerlink" title="5. 更新主题"></a>5. 更新主题</h3><p>主题可能会不定时优化和更新，更新主题代码：</p>
-<pre><code class="bash">cd themes/hexo-theme-snippet
-git pull
-</code></pre>
-<h1 id="主题篇"><a href="#主题篇" class="headerlink" title="主题篇"></a><strong>主题篇</strong></h1><h3 id="1-主题配置"><a href="#1-主题配置" class="headerlink" title="1. 主题配置"></a>1. 主题配置</h3><pre><code class="yaml">
-## menu -- 导航菜单显示{[@page:名字,@url:地址,@icon:图标]}
-menu:
-  - page: home
-    url: /
-    icon: fa-home
-
-## favicon -- 网站图标位置{@favicon}
-favicon: /favicon.ico
-
-## rss --rss文件位置{@rss}
-rss: /atom.xml
-
-
-# 各个小工具的设置
-
-## widgets -- 6个左边小工具{@widgets:[notification,category,archive,tagcloud,friends]}
-widgets:
-  - search
-  - notification
-  - social
-  - category
-  - archive
-  - tagcloud
-  - friends
-
-# 各个小工具的设置
-
-## 搜索
-jsonContent:
-  searchLocal: true // 是否启用本地搜索
-  searchGoogle: true //是否启用谷歌搜索
-  posts:
-    title: true
-    text: true
-    content: true
-    categories: false
-    tags: false
-
-## notification config --网站公告设置,支持 html 和 纯文本
-notification: |-
-            &lt;p&gt;主题已经上线！欢迎下载或更新~ &lt;br/&gt;
-            主题下载：&lt;a href=&quot;https://github.com/shenliyang/hexo-theme-snippet&quot; title=&quot;fork me&quot; target=&quot;_blank&quot;&gt;Snippet主题&lt;/a&gt; &lt;br/&gt;
-            &lt;hr/&gt;接受贡献，包括不限于提交问题与需求，修复代码。欢迎Pull Request&lt;br/&gt;支持主题：&lt;a href=&quot;https://github.com/shenliyang/hexo-theme-snippet/stargazers&quot;&gt;Star一下&lt;/a&gt;&lt;/p&gt;
-
-## 社交设置{@name:社交工具名字，@icon:社交工具图标，@href:设置工具链接} [参考图标](http://fontawesome.io/icons/)
-social:
-  - name: Github
-    icon: git
-    href: //github.com/shenliyang
-
-## 文章分类设置{@cate_config:{@show_count:是否显示数字，@show_current: 是否高亮当前category}}
-cate_config:
-   show_count: true
-   show_current: true
-
-## 文章归档设置{@arch_config:/*参数参考：https://hexo.io/zh-cn/docs/helpers.html#list-archives*/}
-## 推荐组合方式：[{type: &#39;monthly&#39;,format: &#39;YYYY年MM月&#39;},{type: &#39;yearly&#39;,format: &#39;YYYY年&#39;}]
-arch_config:
-   type: &#39;monthly&#39;
-   format: &#39;YYYY年MM月&#39;
-   show_count: true
-   order: -1
-
-## 标签云设置{/*参数参考：http://www.goat1000.com/tagcanvas-options.php */}
-tagcloud:
-  tag3d: false // 是否启用3D标签云
-  textColour: &#39;#444&#39; // 字体颜色
-  outlineMethod: &#39;block&#39; // 选中模式(outline|classic|block|colour|size|none)
-  outlineColour: &#39;#FFDAB9&#39; // 选中模式的颜色
-  interval: 30 // 动画帧之间的时间间隔，值越大，转动幅度越大
-  freezeActive: true // 选中的标签是否继续滚动
-  frontSelect: true // 不选标签云后部的标签
-  reverse: true // 是否反向触发
-  wheelZoom: false // 是否启用鼠标滚轮
-
-## 友链设置{@链接名称：链接地址{@links:[,,,]}}
-links:
-  - Hexo官网: https://hexo.io/zh-cn/
-
-
-# 主题自定义个性化配置
-
-## 网站宣传语{@branding：网站宣传语(不设置显示本地图片)}
-branding: 从未如此简单有趣
-
-## 设置banner背景图片{@img:imgUrl自定义图片地址,主题默认{&quot;静态背景&quot;:&quot;banner.jpg&quot;},{&quot;动态背景&quot;:&quot;banner2.jpg&quot;}}
-banner:
-  img: imgUrl
-
-## 设置carousel{@img:图片地址,@url:点击跳转链接(默认值:&quot;javascript:&quot;)}
-carousel:
-  img: &#39;img/head-img.jpg&#39;
-  url: &#39;javascript:&#39;
-
-## 首页列表底部面板{@homePanel: 是否开启}
-homePanel: true
-
-## 首页文章列表缩略图
-### 加载规则: 自定义文章缩略图(在Front-matter中添加的&#39;img&#39;字段) &gt; 文章内的图片 &gt; defaultImgs(随机获取) &gt; 无图模式列表
-
-## 自定义随机图片
-defaultImgs:
-  - http://www.example.jpg //远程图片链接示例
-  - /img/default-1.jpg //本地图片链接示例
-
-### 文章摘要{@摘要显示优先级：自定义摘要 &gt; 自动截取摘要 }
-### 自定义摘要范围{@&lt;!--more--&gt;:截取more之前的内容为摘要}
-### 自动截取摘要{@excerptLength:自动截取文章前多少个字为摘要，不配置默认：120字}
-excerptLength: 120
-
-## 是否开启文章目录
-toc: true
-
-## 代码高亮配置{@highlightTheme: 主题名称,(配置暂时不可用，后续开发中…)}
-
-highlightTheme: default //TODO
-
-## 文章过期提醒功能 {@warning:{days:临界天数(默认300天,设置0关闭功能),text:提醒文字/*%d为过期总天数占位符*/}}
-warning:
-  days: 300
-  text: &#39;本文于%d天之前发表，文中内容可能已经过时。&#39;
-
-## 文章内声明{@declaration: {enable:是否开启,title:声明标题,tip:提示内容}}
-declaration:
-  enable: true
-  title: &#39;转载声明&#39;
-  tip: |-
-      商业转载请联系作者获得授权,非商业转载请注明出处 © &lt;a href=&quot;&quot; target=&quot;_blank&quot;&gt;Snippet&lt;/a&gt;
-
-## 文章打赏{@reward: {alipay:支付宝打赏,wepay:微信打赏,tip:打赏提示语; 链接都为空,关闭打赏功能}}
-reward:
-  alipay: &#39;&#39;
-  wepay: &#39;../img/reward-wepay.jpg&#39;
-  tip: 赞赏是不耍流氓的鼓励
-
-
-## 主题评论
-
-### gitment
-gitment:
-  enable: false
-  owner:
-  repo:
-  client_id:
-  client_secret:
-  labels:
-  perPage:
-  maxCommentHeight:
-
-### 来必力(默认选项)
-livere:
-  enable: true
-  livere_uid:
-
-### 友言评论(服务不稳定，经常无法加载)
-uyan:
-  enable: false
-  uyan_id:
-
-### Disqus评论(需要翻墙，或者搭建代理)
-disqus:
-  enable: false
-  shortname: snippet
-  count: false
-
-### 畅言评论(需要ICP备案)
-changyan:
-  enable: false
-  appid:
-  conf:
-
-### Valine评论 参考网站: [valine评论](https://valine.js.org/)
-valine:
-  enable: true
-  appId:
-  appKey:
-  placeholder: 说点什么吧
-  notify: false // 邮件通知
-  verify: false // 验证码
-  avatar: mm // avatar头像
-  meta: nick,mail // 输入框内容，可选值nick,mail,link
-  pageSize: 10
-
-## 网站访客统计 [不蒜子统计](http://busuanzi.ibruce.info/)
-visit_counter:
-   site: true // 总访问量和访问人数统计
-   page: true // 文章阅读量统计
-
-## 网站访问统计
-
-### 网盟CNZZ统计 参考网站: [网盟CNZZ](http://www.umeng.com/)
-cnzz_anaylytics:
-
-### 百度统计 参考网站: [百度统计](https://tongji.baidu.com/)
-baidu_anaylytics:
-
-### 谷歌统计 参考网站：[谷歌统计](https://www.google-analytics.com/)
-google_anaylytics:
-
-### 腾讯分析 参考网站：[腾讯分析](http://ta.qq.com/)
-tencent_analytics:
-
-### 百度站点认证
-baidu-site-verification:
-
-### 百度自动推送(@baidu_push: 是否启用百度自动推送)  参考网站: [百度站长资源](https://ziyuan.baidu.com/college/courseinfo?id=267&amp;page=2#h2_article_title18)
-baidu_push:
-
-## ICON配置 (不配则启用本地Font Icon)
-fontAwesome: //cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css
-
-## 网站主题配置
-since: 2017  //建站时间
-robot: &#39;all&#39;  //控制搜索引擎的抓取和索引编制行为，默认为all
-version: 1.2.1  //当前主题版本号
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> themes/hexo-theme-snippet</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<h1 id="主题篇"><a href="#主题篇" class="headerlink" title="主题篇"></a><strong>主题篇</strong></h1><h3 id="1-主题配置"><a href="#1-主题配置" class="headerlink" title="1. 主题配置"></a>1. 主题配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">## menu -- 导航菜单显示&#123;[@page:名字,@url:地址,@icon:图标]&#125;</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  - page:</span> <span class="string">home</span></span><br><span class="line"><span class="attr">    url:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">    icon:</span> <span class="string">fa-home</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## favicon -- 网站图标位置&#123;@favicon&#125;</span></span><br><span class="line"><span class="attr">favicon:</span> <span class="string">/favicon.ico</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## rss --rss文件位置&#123;@rss&#125;</span></span><br><span class="line"><span class="attr">rss:</span> <span class="string">/atom.xml</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 各个小工具的设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## widgets -- 6个左边小工具&#123;@widgets:[notification,category,archive,tagcloud,friends]&#125;</span></span><br><span class="line"><span class="attr">widgets:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">search</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">notification</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">social</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">category</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">archive</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">tagcloud</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">friends</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 各个小工具的设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 搜索</span></span><br><span class="line"><span class="attr">jsonContent:</span></span><br><span class="line"><span class="attr">  searchLocal:</span> <span class="literal">true</span> <span class="string">//</span> <span class="string">是否启用本地搜索</span></span><br><span class="line"><span class="attr">  searchGoogle:</span> <span class="literal">true</span> <span class="string">//是否启用谷歌搜索</span></span><br><span class="line"><span class="attr">  posts:</span></span><br><span class="line"><span class="attr">    title:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    text:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    content:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    categories:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    tags:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## notification config --网站公告设置,支持 html 和 纯文本</span></span><br><span class="line"><span class="attr">notification:</span> <span class="string">|-</span></span><br><span class="line">            <span class="string">&lt;p&gt;主题已经上线！欢迎下载或更新~</span> <span class="string">&lt;br/&gt;</span></span><br><span class="line">            <span class="string">主题下载：&lt;a</span> <span class="string">href="https://github.com/shenliyang/hexo-theme-snippet"</span> <span class="string">title="fork</span> <span class="string">me"</span> <span class="string">target="_blank"&gt;Snippet主题&lt;/a&gt;</span> <span class="string">&lt;br/&gt;</span></span><br><span class="line">            <span class="string">&lt;hr/&gt;接受贡献，包括不限于提交问题与需求，修复代码。欢迎Pull</span> <span class="string">Request&lt;br/&gt;支持主题：&lt;a</span> <span class="string">href="https://github.com/shenliyang/hexo-theme-snippet/stargazers"&gt;Star一下&lt;/a&gt;&lt;/p&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 社交设置&#123;@name:社交工具名字，@icon:社交工具图标，@href:设置工具链接&#125; [参考图标](http://fontawesome.io/icons/)</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">Github</span></span><br><span class="line"><span class="attr">    icon:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">    href:</span> <span class="string">//github.com/shenliyang</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 文章分类设置&#123;@cate_config:&#123;@show_count:是否显示数字，@show_current: 是否高亮当前category&#125;&#125;</span></span><br><span class="line"><span class="attr">cate_config:</span></span><br><span class="line"><span class="attr">   show_count:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">   show_current:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 文章归档设置&#123;@arch_config:/*参数参考：https://hexo.io/zh-cn/docs/helpers.html#list-archives*/&#125;</span></span><br><span class="line"><span class="comment">## 推荐组合方式：[&#123;type: 'monthly',format: 'YYYY年MM月'&#125;,&#123;type: 'yearly',format: 'YYYY年'&#125;]</span></span><br><span class="line"><span class="attr">arch_config:</span></span><br><span class="line"><span class="attr">   type:</span> <span class="string">'monthly'</span></span><br><span class="line"><span class="attr">   format:</span> <span class="string">'YYYY年MM月'</span></span><br><span class="line"><span class="attr">   show_count:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">   order:</span> <span class="bullet">-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 标签云设置&#123;/*参数参考：http://www.goat1000.com/tagcanvas-options.php */&#125;</span></span><br><span class="line"><span class="attr">tagcloud:</span></span><br><span class="line"><span class="attr">  tag3d:</span> <span class="literal">false</span> <span class="string">//</span> <span class="string">是否启用3D标签云</span></span><br><span class="line"><span class="attr">  textColour:</span> <span class="string">'#444'</span> <span class="string">//</span> <span class="string">字体颜色</span></span><br><span class="line"><span class="attr">  outlineMethod:</span> <span class="string">'block'</span> <span class="string">//</span> <span class="string">选中模式(outline|classic|block|colour|size|none)</span></span><br><span class="line"><span class="attr">  outlineColour:</span> <span class="string">'#FFDAB9'</span> <span class="string">//</span> <span class="string">选中模式的颜色</span></span><br><span class="line"><span class="attr">  interval:</span> <span class="number">30</span> <span class="string">//</span> <span class="string">动画帧之间的时间间隔，值越大，转动幅度越大</span></span><br><span class="line"><span class="attr">  freezeActive:</span> <span class="literal">true</span> <span class="string">//</span> <span class="string">选中的标签是否继续滚动</span></span><br><span class="line"><span class="attr">  frontSelect:</span> <span class="literal">true</span> <span class="string">//</span> <span class="string">不选标签云后部的标签</span></span><br><span class="line"><span class="attr">  reverse:</span> <span class="literal">true</span> <span class="string">//</span> <span class="string">是否反向触发</span></span><br><span class="line"><span class="attr">  wheelZoom:</span> <span class="literal">false</span> <span class="string">//</span> <span class="string">是否启用鼠标滚轮</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 友链设置&#123;@链接名称：链接地址&#123;@links:[,,,]&#125;&#125;</span></span><br><span class="line"><span class="attr">links:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">Hexo官网:</span> <span class="attr">https://hexo.io/zh-cn/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主题自定义个性化配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 网站宣传语&#123;@branding：网站宣传语(不设置显示本地图片)&#125;</span></span><br><span class="line"><span class="attr">branding:</span> <span class="string">从未如此简单有趣</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 设置banner背景图片&#123;@img:imgUrl自定义图片地址,主题默认&#123;"静态背景":"banner.jpg"&#125;,&#123;"动态背景":"banner2.jpg"&#125;&#125;</span></span><br><span class="line"><span class="attr">banner:</span></span><br><span class="line"><span class="attr">  img:</span> <span class="string">imgUrl</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 设置carousel&#123;@img:图片地址,@url:点击跳转链接(默认值:"javascript:")&#125;</span></span><br><span class="line"><span class="attr">carousel:</span></span><br><span class="line"><span class="attr">  img:</span> <span class="string">'img/head-img.jpg'</span></span><br><span class="line"><span class="attr">  url:</span> <span class="string">'javascript:'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 首页列表底部面板&#123;@homePanel: 是否开启&#125;</span></span><br><span class="line"><span class="attr">homePanel:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 首页文章列表缩略图</span></span><br><span class="line"><span class="comment">### 加载规则: 自定义文章缩略图(在Front-matter中添加的'img'字段) &gt; 文章内的图片 &gt; defaultImgs(随机获取) &gt; 无图模式列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 自定义随机图片</span></span><br><span class="line"><span class="attr">defaultImgs:</span></span><br><span class="line"><span class="attr">  - http:</span><span class="string">//www.example.jpg</span> <span class="string">//远程图片链接示例</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">/img/default-1.jpg</span> <span class="string">//本地图片链接示例</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 文章摘要&#123;@摘要显示优先级：自定义摘要 &gt; 自动截取摘要 &#125;</span></span><br><span class="line"><span class="comment">### 自定义摘要范围&#123;@&lt;!--more--&gt;:截取more之前的内容为摘要&#125;</span></span><br><span class="line"><span class="comment">### 自动截取摘要&#123;@excerptLength:自动截取文章前多少个字为摘要，不配置默认：120字&#125;</span></span><br><span class="line"><span class="attr">excerptLength:</span> <span class="number">120</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 是否开启文章目录</span></span><br><span class="line"><span class="attr">toc:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 代码高亮配置&#123;@highlightTheme: 主题名称,(配置暂时不可用，后续开发中…)&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">highlightTheme:</span> <span class="string">default</span> <span class="string">//TODO</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 文章过期提醒功能 &#123;@warning:&#123;days:临界天数(默认300天,设置0关闭功能),text:提醒文字/*%d为过期总天数占位符*/&#125;&#125;</span></span><br><span class="line"><span class="attr">warning:</span></span><br><span class="line"><span class="attr">  days:</span> <span class="number">300</span></span><br><span class="line"><span class="attr">  text:</span> <span class="string">'本文于%d天之前发表，文中内容可能已经过时。'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 文章内声明&#123;@declaration: &#123;enable:是否开启,title:声明标题,tip:提示内容&#125;&#125;</span></span><br><span class="line"><span class="attr">declaration:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  title:</span> <span class="string">'转载声明'</span></span><br><span class="line"><span class="attr">  tip:</span> <span class="string">|-</span></span><br><span class="line">      <span class="string">商业转载请联系作者获得授权,非商业转载请注明出处</span> <span class="string">©</span> <span class="string">&lt;a</span> <span class="string">href=""</span> <span class="string">target="_blank"&gt;Snippet&lt;/a&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 文章打赏&#123;@reward: &#123;alipay:支付宝打赏,wepay:微信打赏,tip:打赏提示语; 链接都为空,关闭打赏功能&#125;&#125;</span></span><br><span class="line"><span class="attr">reward:</span></span><br><span class="line"><span class="attr">  alipay:</span> <span class="string">''</span></span><br><span class="line"><span class="attr">  wepay:</span> <span class="string">'../img/reward-wepay.jpg'</span></span><br><span class="line"><span class="attr">  tip:</span> <span class="string">赞赏是不耍流氓的鼓励</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 主题评论</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### gitment</span></span><br><span class="line"><span class="attr">gitment:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  owner:</span></span><br><span class="line"><span class="attr">  repo:</span></span><br><span class="line"><span class="attr">  client_id:</span></span><br><span class="line"><span class="attr">  client_secret:</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">  perPage:</span></span><br><span class="line"><span class="attr">  maxCommentHeight:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 来必力(默认选项)</span></span><br><span class="line"><span class="attr">livere:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  livere_uid:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 友言评论(服务不稳定，经常无法加载)</span></span><br><span class="line"><span class="attr">uyan:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  uyan_id:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### Disqus评论(需要翻墙，或者搭建代理)</span></span><br><span class="line"><span class="attr">disqus:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  shortname:</span> <span class="string">snippet</span></span><br><span class="line"><span class="attr">  count:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 畅言评论(需要ICP备案)</span></span><br><span class="line"><span class="attr">changyan:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  appid:</span></span><br><span class="line"><span class="attr">  conf:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### Valine评论 参考网站: [valine评论](https://valine.js.org/)</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  appId:</span></span><br><span class="line"><span class="attr">  appKey:</span></span><br><span class="line"><span class="attr">  placeholder:</span> <span class="string">说点什么吧</span></span><br><span class="line"><span class="attr">  notify:</span> <span class="literal">false</span> <span class="string">//</span> <span class="string">邮件通知</span></span><br><span class="line"><span class="attr">  verify:</span> <span class="literal">false</span> <span class="string">//</span> <span class="string">验证码</span></span><br><span class="line"><span class="attr">  avatar:</span> <span class="string">mm</span> <span class="string">//</span> <span class="string">avatar头像</span></span><br><span class="line"><span class="attr">  meta:</span> <span class="string">nick,mail</span> <span class="string">//</span> <span class="string">输入框内容，可选值nick,mail,link</span></span><br><span class="line"><span class="attr">  pageSize:</span> <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 网站访客统计 [不蒜子统计](http://busuanzi.ibruce.info/)</span></span><br><span class="line"><span class="attr">visit_counter:</span></span><br><span class="line"><span class="attr">   site:</span> <span class="literal">true</span> <span class="string">//</span> <span class="string">总访问量和访问人数统计</span></span><br><span class="line"><span class="attr">   page:</span> <span class="literal">true</span> <span class="string">//</span> <span class="string">文章阅读量统计</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 网站访问统计</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 网盟CNZZ统计 参考网站: [网盟CNZZ](http://www.umeng.com/)</span></span><br><span class="line"><span class="attr">cnzz_anaylytics:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 百度统计 参考网站: [百度统计](https://tongji.baidu.com/)</span></span><br><span class="line"><span class="attr">baidu_anaylytics:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 谷歌统计 参考网站：[谷歌统计](https://www.google-analytics.com/)</span></span><br><span class="line"><span class="attr">google_anaylytics:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 腾讯分析 参考网站：[腾讯分析](http://ta.qq.com/)</span></span><br><span class="line"><span class="attr">tencent_analytics:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 百度站点认证</span></span><br><span class="line"><span class="attr">baidu-site-verification:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 百度自动推送(@baidu_push: 是否启用百度自动推送)  参考网站: [百度站长资源](https://ziyuan.baidu.com/college/courseinfo?id=267&amp;page=2#h2_article_title18)</span></span><br><span class="line"><span class="attr">baidu_push:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## ICON配置 (不配则启用本地Font Icon)</span></span><br><span class="line"><span class="attr">fontAwesome:</span> <span class="string">//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 网站主题配置</span></span><br><span class="line"><span class="attr">since:</span> <span class="number">2017</span>  <span class="string">//建站时间</span></span><br><span class="line"><span class="attr">robot:</span> <span class="string">'all'</span>  <span class="string">//控制搜索引擎的抓取和索引编制行为，默认为all</span></span><br><span class="line"><span class="attr">version:</span> <span class="number">1.2</span><span class="number">.1</span>  <span class="string">//当前主题版本号</span></span><br></pre></td></tr></table></figure>
 <h3 id="主题使用技巧及功能扩展"><a href="#主题使用技巧及功能扩展" class="headerlink" title="主题使用技巧及功能扩展"></a>主题使用技巧及功能扩展</h3><ol>
 <li><p>修改新增文章Front-matter模板,修改<code>scaffolds</code>目录下的<code>post.md</code>模板</p>
 <blockquote>
 <p>模板文件内部不要保留注释部分,关键词后面请使用英文冒号</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">&#123;&#123;</span> <span class="string">title</span> <span class="string">&#125;&#125;</span> <span class="string">//</span> <span class="string">标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="string">&#123;&#123;</span> <span class="string">date</span> <span class="string">&#125;&#125;</span>   <span class="string">//</span> <span class="string">时间</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">['分类1','分类2']</span> <span class="string">//</span> <span class="string">分类</span></span><br><span class="line"><span class="attr">tags:</span> <span class="string">['标签1','标签2']</span>       <span class="string">//</span> <span class="string">标签</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span>    <span class="string">//</span> <span class="string">是否开启评论</span></span><br><span class="line"><span class="attr">img:</span>               <span class="string">//</span> <span class="string">自定义缩略图</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
 </blockquote>
-<pre><code class="yml">---
-title: {{ title }} // 标题
-date: {{ date }}   // 时间
-categories: [&#39;分类1&#39;,&#39;分类2&#39;] // 分类
-tags: [&#39;标签1&#39;,&#39;标签2&#39;]       // 标签
-comments: false    // 是否开启评论
-img:               // 自定义缩略图
----
-</code></pre>
 </li>
 <li><p>启用站内本地搜索功能</p>
 </li>
 </ol>
-<p>如果要使用本地站点搜索，必须安装插件hexo-generator-json-content来创建本地搜索json文件</p>
-<pre><code class="bash">npm i hexo-generator-json-content@2.2.0 -S
-</code></pre>
+<p>如果要使用本地站点搜索，必须安装插件hexo-generator-json-content来创建本地搜索json文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-generator-json-content@2.2.0 -S</span><br></pre></td></tr></table></figure></p>
 <p>然后修改主题配置_config.yml文件下<code>jsonContent</code>相关参数。</p>
 <h1 id="提升篇"><a href="#提升篇" class="headerlink" title="提升篇"></a><strong>提升篇</strong></h1><h2 id="1-Travis-CI-介绍"><a href="#1-Travis-CI-介绍" class="headerlink" title="1. Travis CI 介绍"></a>1. Travis CI 介绍</h2><p>CI即持续集成系统。对个人而言，就是让你的代码在提交到远程(这里是GitHub)，立即自动编译，自动化测试、自动部署等。</p>
 <p>不需要在担心更换电脑时，还要从新部署环境的问题，只要你能向远程推送文章，其他的事情就都可以交给Travis CI处理就ok了。</p>
@@ -477,51 +241,16 @@ img:               // 自定义缩略图
 </ol>
 </blockquote>
 <ol start="2">
-<li>配置travis.yml 文件<br><code>`</code> yml<br>language: node_js #使用Node语言环境<br>node_js: stable #安装稳定版Node</li>
-</ol>
-<p>sudo: false</p>
-<p>#cache 启用缓存，加快构建速度<br>cache:<br>  directories:</p>
-<pre><code>- &quot;node_modules&quot;
-</code></pre><p>notifications: #启用通知<br>  email:<br>    recipients:</p>
-<pre><code>  - snippet@91h5.cc #接收构建消息的邮件 不需要可设置为false
-on_success: never #部署成功时，可设置alway never change
-on_failure: always #部署失败时，同上
-</code></pre><h1 id="S-Build-Lifecycle"><a href="#S-Build-Lifecycle" class="headerlink" title="S: Build Lifecycle"></a>S: Build Lifecycle</h1><p>install:</p>
-<ul>
-<li>npm install  #安装依赖</li>
-</ul>
-<p>before_script:</p>
-<ul>
-<li>export TZ=’Asia/Shanghai’ #设置时区</li>
-<li>npm install -g gulp  #全局安装Gulp</li>
-<li>chmod +x _travis.sh  #授权脚本执行权限</li>
-</ul>
-<p>script:</p>
-<ul>
-<li>hexo clean &amp;&amp; hexo g #清除缓存并生成静态文件</li>
-<li>gulp #执行gulp任务</li>
-</ul>
-<p>after_success: #执行成功时(以后扩展功能使用)</p>
-<p>after_script:</p>
-<ul>
-<li>./_travis.sh #执行部署脚本<h1 id="E-Build-LifeCycle"><a href="#E-Build-LifeCycle" class="headerlink" title="E: Build LifeCycle"></a>E: Build LifeCycle</h1></li>
-</ul>
-<p>branches:<br>  only:</p>
-<pre><code>- dev #需要监听部署的分支
-</code></pre><p>env:<br>  global:</p>
-<ul>
-<li>GH_REF: github.com/shenliyang/shenliyang.github.io.git #更改为自己git地址<br><code>`</code></li>
-</ul>
-<ol start="3">
-<li>提交代码到Github，实现自动部署</li>
+<li><p>配置travis.yml 文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">node_js</span> <span class="comment">#使用Node语言环境</span></span><br><span class="line"><span class="attr">node_js:</span> <span class="string">stable</span> <span class="comment">#安装稳定版Node</span></span><br><span class="line"></span><br><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#cache 启用缓存，加快构建速度</span></span><br><span class="line"><span class="attr">cache:</span></span><br><span class="line"><span class="attr">  directories:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">"node_modules"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">notifications:</span> <span class="comment">#启用通知</span></span><br><span class="line"><span class="attr">  email:</span></span><br><span class="line"><span class="attr">    recipients:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">snippet@91h5.cc</span> <span class="comment">#接收构建消息的邮件 不需要可设置为false</span></span><br><span class="line"><span class="attr">    on_success:</span> <span class="string">never</span> <span class="comment">#部署成功时，可设置alway never change</span></span><br><span class="line"><span class="attr">    on_failure:</span> <span class="string">always</span> <span class="comment">#部署失败时，同上</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S: Build Lifecycle</span></span><br><span class="line"><span class="attr">install:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">npm</span> <span class="string">install</span>  <span class="comment">#安装依赖</span></span><br><span class="line"></span><br><span class="line"><span class="attr">before_script:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">export</span> <span class="string">TZ='Asia/Shanghai'</span> <span class="comment">#设置时区</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">npm</span> <span class="string">install</span> <span class="bullet">-g</span> <span class="string">gulp</span>  <span class="comment">#全局安装Gulp</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">chmod</span> <span class="string">+x</span> <span class="string">_travis.sh</span>  <span class="comment">#授权脚本执行权限</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">hexo</span> <span class="string">clean</span> <span class="string">&amp;&amp;</span> <span class="string">hexo</span> <span class="string">g</span> <span class="comment">#清除缓存并生成静态文件</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">gulp</span> <span class="comment">#执行gulp任务</span></span><br><span class="line"></span><br><span class="line"><span class="attr">after_success:</span> <span class="comment">#执行成功时(以后扩展功能使用)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">after_script:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">./_travis.sh</span> <span class="comment">#执行部署脚本</span></span><br><span class="line"><span class="comment"># E: Build LifeCycle</span></span><br><span class="line"></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line"><span class="attr">  only:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">dev</span> <span class="comment">#需要监听部署的分支</span></span><br><span class="line"><span class="attr">env:</span></span><br><span class="line"><span class="attr">  global:</span></span><br><span class="line"><span class="attr">   - GH_REF:</span> <span class="string">github.com/shenliyang/shenliyang.github.io.git</span> <span class="comment">#更改为自己git地址</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提交代码到Github，实现自动部署</p>
+</li>
 <li>当 <code>.travis.yml</code>配置文件修改完成后，将其提交到远程仓库的 hexo 分支下，此时如果之前的配置一切ok，我们应该能在 Travis CI 的博客项目主页页面中看到自动构建已经在开始执行了。上面会显示出构建过程中的日志信息及状态等。</li>
 </ol>
-<h2 id="3-主题开发"><a href="#3-主题开发" class="headerlink" title="3. 主题开发"></a>3. 主题开发</h2><p>Gulp 执行启用主题开发模式</p>
-<pre><code class="bash">gulp dev
-</code></pre>
+<h2 id="3-主题开发"><a href="#3-主题开发" class="headerlink" title="3. 主题开发"></a>3. 主题开发</h2><p>Gulp 执行启用主题开发模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp dev</span><br></pre></td></tr></table></figure></p>
 <p>会监听样式less或者JS文件的变动。然后执行上面的【主题发布】即可。</p>
-<h3 id="运行预览"><a href="#运行预览" class="headerlink" title="运行预览"></a>运行预览</h3><pre><code class="bash">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s -p 4000
-</code></pre>
+<h3 id="运行预览"><a href="#运行预览" class="headerlink" title="运行预览"></a>运行预览</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s -p 4000</span><br></pre></td></tr></table></figure>
 <p>监听4000端口，使用浏览器打开地址<code>http://localhost:4000</code>进行预览。</p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a><strong>其他</strong></h1><h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>在设计这款主题的时候参考了好多主题和博客的设计和创意，深表感谢！</p>
 <h2 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h2><p>接受各种形式的贡献，包括但不限于提交问题或需求，修复代码。<br>欢迎大家提Issue或者Pull Request。</p>
@@ -531,8 +260,7 @@ on_failure: always #部署失败时，同上
 <p>Hexo框架追求的是快速、简洁，高效。喜欢绚丽，添加各种功能，折腾的朋友，建议移步至：<a href="https://cn.wordpress.org/" target="_blank" rel="noopener">wordpress官网</a></p>
 </blockquote>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="1-搜索功能不能用，content-json文件找不到？"><a href="#1-搜索功能不能用，content-json文件找不到？" class="headerlink" title="1. 搜索功能不能用，content.json文件找不到？"></a>1. 搜索功能不能用，content.json文件找不到？</h4><p>需要安装hexo-generator-json-content插件：</p>
-<pre><code class="bash">npm i hexo-generator-json-content@2.2.0 -S
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-generator-json-content@2.2.0 -S</span><br></pre></td></tr></table></figure>
 <h4 id="2-谷歌搜索没有响应？"><a href="#2-谷歌搜索没有响应？" class="headerlink" title="2. 谷歌搜索没有响应？"></a>2. 谷歌搜索没有响应？</h4><p>如果使用谷歌搜索没有响应，确定是否已经科学上网</p>
 <h4 id="3-怎么设置首页文章缩略图自动检索文章内图片？"><a href="#3-怎么设置首页文章缩略图自动检索文章内图片？" class="headerlink" title="3. 怎么设置首页文章缩略图自动检索文章内图片？"></a>3. 怎么设置首页文章缩略图自动检索文章内图片？</h4><p>首页文章缩略图加载规则: 自定义文章缩略图 &gt; 自动检索文章内的图片 &gt; defaultImgs(随机获取) &gt; 无图模式列表</p>
 <p>在<code>Front-matter</code>中：<br>指定img变量 -&gt; 为固定缩略图<br>不指定img变量 -&gt; 自动检索文章内的图片</p>
@@ -560,16 +288,12 @@ on_failure: always #部署失败时，同上
 </tbody>
 </table>
 <h4 id="6-为什么右侧小工具标题都为英文呢？"><a href="#6-为什么右侧小工具标题都为英文呢？" class="headerlink" title="6. 为什么右侧小工具标题都为英文呢？"></a>6. 为什么右侧小工具标题都为英文呢？</h4><p>可能是您忘记预设网站语言，而启用默认语言了，请先在Hexo配置中调整 language 设定</p>
-<pre><code class="bash">language: zh-CN
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">language: zh-CN</span><br></pre></td></tr></table></figure>
 <h4 id="7-关于Hexo标签和分类方法的分歧"><a href="#7-关于Hexo标签和分类方法的分歧" class="headerlink" title="7. 关于Hexo标签和分类方法的分歧"></a>7. 关于Hexo标签和分类方法的分歧</h4><blockquote>
 <p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说  <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
 </blockquote>
 <p>如果您有过使用WordPress的经验，就很容易误解Hexo的分类方式。WordPress支持对一篇文章设置多个分类，而且这些分类可以是同级的，也可以是父子分类。但是Hexo不支持指定多个同级分类。下面的指定方法：</p>
-<pre><code class="bash">categories:
-- Diary
-- Life
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">categories:</span><br><span class="line">- Diary</span><br><span class="line">- Life</span><br></pre></td></tr></table></figure>
 <p>会使分类Life成为Diary的子分类，而不是并列分类。因此，有必要为您的文章选择尽可能准确的分类。</p>
 <p>Hexo官方文档: <a href="https://hexo.io/zh-cn/docs/front-matter#分类和标签" target="_blank" rel="noopener">分类方法的分歧</a></p>
 <blockquote>
@@ -693,7 +417,7 @@ on_failure: always #部署失败时，同上
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#hexo-theme-snippet"><span class="post-toc-text">hexo-theme-snippet</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主题特点"><span class="post-toc-text">主题特点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基础篇"><span class="post-toc-text">基础篇</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-环境搭建"><span class="post-toc-text">1. 环境搭建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-下载主题"><span class="post-toc-text">2. 下载主题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-安装主题插件"><span class="post-toc-text">3. 安装主题插件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-部署主题"><span class="post-toc-text">4. 部署主题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-更新主题"><span class="post-toc-text">5. 更新主题</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#主题篇"><span class="post-toc-text">主题篇</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-主题配置"><span class="post-toc-text">1. 主题配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主题使用技巧及功能扩展"><span class="post-toc-text">主题使用技巧及功能扩展</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#提升篇"><span class="post-toc-text">提升篇</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Travis-CI-介绍"><span class="post-toc-text">1. Travis CI 介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Travis-CI-使用"><span class="post-toc-text">2. Travis CI 使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#S-Build-Lifecycle"><span class="post-toc-text">S: Build Lifecycle</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#E-Build-LifeCycle"><span class="post-toc-text">E: Build LifeCycle</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-主题开发"><span class="post-toc-text">3. 主题开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行预览"><span class="post-toc-text">运行预览</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#其他"><span class="post-toc-text">其他</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#感谢"><span class="post-toc-text">感谢</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#贡献"><span class="post-toc-text">贡献</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#宗旨"><span class="post-toc-text">宗旨</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常见问题"><span class="post-toc-text">常见问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-搜索功能不能用，content-json文件找不到？"><span class="post-toc-text">1. 搜索功能不能用，content.json文件找不到？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-谷歌搜索没有响应？"><span class="post-toc-text">2. 谷歌搜索没有响应？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-怎么设置首页文章缩略图自动检索文章内图片？"><span class="post-toc-text">3. 怎么设置首页文章缩略图自动检索文章内图片？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-在url哪里可以访问到本地静态文件吗？"><span class="post-toc-text">4. 在url哪里可以访问到本地静态文件吗？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-这个主题有分页功能吗？"><span class="post-toc-text">5. 这个主题有分页功能吗？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-为什么右侧小工具标题都为英文呢？"><span class="post-toc-text">6. 为什么右侧小工具标题都为英文呢？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-关于Hexo标签和分类方法的分歧"><span class="post-toc-text">7. 关于Hexo标签和分类方法的分歧</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#版本更新日志"><span class="post-toc-text">版本更新日志</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#License"><span class="post-toc-text">License</span></a></li>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#hexo-theme-snippet"><span class="post-toc-text">hexo-theme-snippet</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主题特点"><span class="post-toc-text">主题特点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基础篇"><span class="post-toc-text">基础篇</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-环境搭建"><span class="post-toc-text">1. 环境搭建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-下载主题"><span class="post-toc-text">2. 下载主题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-安装主题插件"><span class="post-toc-text">3. 安装主题插件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-部署主题"><span class="post-toc-text">4. 部署主题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-更新主题"><span class="post-toc-text">5. 更新主题</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#主题篇"><span class="post-toc-text">主题篇</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-主题配置"><span class="post-toc-text">1. 主题配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主题使用技巧及功能扩展"><span class="post-toc-text">主题使用技巧及功能扩展</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#提升篇"><span class="post-toc-text">提升篇</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Travis-CI-介绍"><span class="post-toc-text">1. Travis CI 介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Travis-CI-使用"><span class="post-toc-text">2. Travis CI 使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-主题开发"><span class="post-toc-text">3. 主题开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行预览"><span class="post-toc-text">运行预览</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#其他"><span class="post-toc-text">其他</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#感谢"><span class="post-toc-text">感谢</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#贡献"><span class="post-toc-text">贡献</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#宗旨"><span class="post-toc-text">宗旨</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常见问题"><span class="post-toc-text">常见问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-搜索功能不能用，content-json文件找不到？"><span class="post-toc-text">1. 搜索功能不能用，content.json文件找不到？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-谷歌搜索没有响应？"><span class="post-toc-text">2. 谷歌搜索没有响应？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-怎么设置首页文章缩略图自动检索文章内图片？"><span class="post-toc-text">3. 怎么设置首页文章缩略图自动检索文章内图片？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-在url哪里可以访问到本地静态文件吗？"><span class="post-toc-text">4. 在url哪里可以访问到本地静态文件吗？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-这个主题有分页功能吗？"><span class="post-toc-text">5. 这个主题有分页功能吗？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-为什么右侧小工具标题都为英文呢？"><span class="post-toc-text">6. 为什么右侧小工具标题都为英文呢？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-关于Hexo标签和分类方法的分歧"><span class="post-toc-text">7. 关于Hexo标签和分类方法的分歧</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#版本更新日志"><span class="post-toc-text">版本更新日志</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#License"><span class="post-toc-text">License</span></a></li>
         </nav>
     </aside>
     
