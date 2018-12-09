@@ -196,7 +196,10 @@
 <p>文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/</a></p>
 <h3 id="1-1-创建自定义组件"><a href="#1-1-创建自定义组件" class="headerlink" title="1.1 创建自定义组件"></a>1.1 创建自定义组件</h3><p>一个自定义组件由 <code>json</code> <code>wxml</code> <code>wxss</code> <code>js</code> 4个文件组成。 </p>
 <p>必要条件：要在 <code>json</code> 文件中进行自定义组件声明</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"component"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">{
+  &quot;component&quot;: true
+}
+</code></pre>
 <p><strong>示例：</strong></p>
 <ol>
 <li><p>我们一般会把组件放到一个专门存放的文件夹中，所以我们现在在项目根目录下创建一个名为component的文件夹（这个文件夹的名字可以任意取），</p>
@@ -216,7 +219,12 @@
 </ol>
 <h3 id="1-2-使用自定义组件"><a href="#1-2-使用自定义组件" class="headerlink" title="1.2 使用自定义组件"></a>1.2 使用自定义组件</h3><p>使用已注册的自定义组件前，首先要在使用方页面的 <code>json</code> 文件中进行引用声明。 </p>
 <p>自定义组件申明方式：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"usingComponents"</span>:&#123;</span><br><span class="line">        <span class="string">"组件名"</span>:<span class="string">"组件所在路径"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">{
+    &quot;usingComponents&quot;:{
+        &quot;组件名&quot;:&quot;组件所在路径&quot;
+    }
+}
+</code></pre>
 <p><strong>示例：</strong></p>
 <ol>
 <li><p>首先要在使用的页面的json文件中声明当前使用的组件（其实就相当于设定代替自定义组件的标签名），如当前我们在use_zujian页面的use_zujian.json中所作的配置：</p>
@@ -263,11 +271,29 @@
 </li>
 </ol>
 <p><strong>==注意：==</strong>默认情况下，一个组件的wxml中只能有一个slot。需要使用多slot时，可以在自定义组件js中声明启用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  options: &#123;</span><br><span class="line">    multipleSlots: <span class="literal">true</span> <span class="comment">// 在组件定义时的选项中启用多slot支持</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">Component({
+  options: {
+    multipleSlots: true // 在组件定义时的选项中启用多slot支持
+  }
+})
+</code></pre>
 <p>此时，可以在这个组件的wxml中使用多个slot，以不同的 <code>name</code> 来区分：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"before"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span>这里是组件的内部细节<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"after"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="html">&lt;view class=&quot;wrapper&quot;&gt;
+  &lt;slot name=&quot;before&quot;&gt;&lt;/slot&gt;
+  &lt;view&gt;这里是组件的内部细节&lt;/view&gt;
+  &lt;slot name=&quot;after&quot;&gt;&lt;/slot&gt;
+&lt;/view&gt;
+</code></pre>
 <p>使用时，用 <code>slot</code> 属性来将节点插入到不同的slot上：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">component-tag-name</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这部分内容将被放置在组件 &lt;slot name="before"&gt; 的位置上 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">slot</span>=<span class="string">"before"</span>&gt;</span>这里是插入到组件slot name="before"中的内容<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这部分内容将被放置在组件 &lt;slot name="after"&gt; 的位置上 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">slot</span>=<span class="string">"after"</span>&gt;</span>这里是插入到组件slot name="after"中的内容<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">component-tag-name</span>&gt;</span>	</span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="html">&lt;view&gt;
+  &lt;component-tag-name&gt;
+    &lt;!-- 这部分内容将被放置在组件 &lt;slot name=&quot;before&quot;&gt; 的位置上 --&gt;
+    &lt;view slot=&quot;before&quot;&gt;这里是插入到组件slot name=&quot;before&quot;中的内容&lt;/view&gt;
+    &lt;!-- 这部分内容将被放置在组件 &lt;slot name=&quot;after&quot;&gt; 的位置上 --&gt;
+    &lt;view slot=&quot;after&quot;&gt;这里是插入到组件slot name=&quot;after&quot;中的内容&lt;/view&gt;
+  &lt;/component-tag-name&gt;    
+&lt;/view&gt;
+</code></pre>
 <p><strong>示例：</strong></p>
 <ol>
 <li><p>在自定义组件zujian1.wxml中构建三个slot节点：</p>
@@ -280,9 +306,13 @@
 </li>
 </ol>
 <h3 id="1-4-外部样式类"><a href="#1-4-外部样式类" class="headerlink" title="1.4 外部样式类"></a>1.4 外部样式类</h3><p>有时，组件希望接受外部传入的样式类。此时可以在 <code>Component</code> 中用 <code>externalClasses</code> 定义段定义若干个外部样式类：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  externalClasses: [<span class="string">'my-class'</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">Component({
+  externalClasses: [&#39;my-class&#39;]
+})
+</code></pre>
 <p>这样，组件内的效果将会受到外部样式的影响：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">custom-component</span> <span class="attr">class</span>=<span class="string">"my-class"</span>&gt;</span>这段文本的颜色由组件外的 class 决定<span class="tag">&lt;/<span class="name">custom-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="html">&lt;custom-component class=&quot;my-class&quot;&gt;这段文本的颜色由组件外的 class 决定&lt;/custom-component&gt;
+</code></pre>
 <p><strong>==注意：==</strong>在同一个节点上使用普通样式类和外部样式类时，两个类的优先级是未定义的，因此最好避免这种情况。</p>
 <p><strong>示例：</strong></p>
 <ol>
@@ -298,16 +328,46 @@
 </li>
 </ol>
 <h3 id="1-5-全局样式"><a href="#1-5-全局样式" class="headerlink" title="1.5 全局样式"></a>1.5 全局样式</h3><p>使用外部样式类可以让组件使用指定的组件外样式类，如果希望组件外样式类能够完全影响组件内部，可以将组件构造器中的<code>options.addGlobalClass</code>字段置为<code>true</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 组件 custom-component.js */</span></span><br><span class="line">Component(&#123;</span><br><span class="line">  options: &#123;</span><br><span class="line">    addGlobalClass: <span class="literal">true</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">/* 组件 custom-component.js */
+Component({
+  options: {
+    addGlobalClass: true,
+  }
+})
+</code></pre>
 <p>设置后在组件的模板文件中：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 组件 custom-component.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">"red-text"</span>&gt;</span>这段文本的颜色由组件外的 class 决定<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="html">&lt;!-- 组件 custom-component.wxml --&gt;
+&lt;text class=&quot;red-text&quot;&gt;这段文本的颜色由组件外的 class 决定&lt;/text&gt;
+</code></pre>
 <p><strong>注意：</strong>当开放了全局样式类，存在外部样式污染组件样式的风险，请谨慎选择。 </p>
 <p><strong>示例：</strong></p>
 <p><img src="/2018/12/09/小程序04/18" alt="1544326294831"></p>
 <h3 id="1-6-传递模板数据"><a href="#1-6-传递模板数据" class="headerlink" title="1.6 传递模板数据"></a>1.6 传递模板数据</h3><p>与普通的 WXML 模板类似，可以使用数据绑定，这样就可以向子组件的属性传递动态数据，但是需要注意，绑定数据前，需要在自定义模板的js文件中进行申明： </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line"></span><br><span class="line">  properties: &#123;</span><br><span class="line">    属性<span class="number">1</span>: &#123;</span><br><span class="line">      type:数据类型,  <span class="comment">//支持的数据类型：String、Array、Object、null、Boolean、Number</span></span><br><span class="line">      value: 默认值</span><br><span class="line">    &#125;,</span><br><span class="line">    属性<span class="number">2</span>: &#123;</span><br><span class="line">      type: 数据类型,</span><br><span class="line">      value: 默认值,</span><br><span class="line">      observer(新值, 老值, 属性名)&#123;<span class="comment">//回调函数</span></span><br><span class="line">          </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">Component({
+
+  properties: {
+    属性1: {
+      type:数据类型,  //支持的数据类型：String、Array、Object、null、Boolean、Number
+      value: 默认值
+    },
+    属性2: {
+      type: 数据类型,
+      value: 默认值,
+      observer(新值, 老值, 属性名){//回调函数
+
+      }
+    }
+  }
+};
+</code></pre>
 <p>下面是使用自定义组件的页面：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引用组件的页面模板 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">component-tag-name</span> 属性<span class="attr">1</span>=<span class="string">"属性1值"</span> 属性<span class="attr">2</span>=<span class="string">"属性2值"</span>&gt;</span></span><br><span class="line">      ....</span><br><span class="line">  <span class="tag">&lt;/<span class="name">component-tag-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="html">&lt;!-- 引用组件的页面模板 --&gt;
+&lt;view&gt;
+  &lt;component-tag-name 属性1=&quot;属性1值&quot; 属性2=&quot;属性2值&quot;&gt;
+      ....
+  &lt;/component-tag-name&gt;
+&lt;/view&gt;
+</code></pre>
 <p><strong>示例：</strong></p>
 <ol>
 <li><p>首先在use_zujian.wxml中构建如下代码，调用自定义组件并且给自定义主键传递数据：</p>
@@ -323,7 +383,20 @@
 </li>
 </ol>
 <h3 id="1-7-组件内绑定数据和方法"><a href="#1-7-组件内绑定数据和方法" class="headerlink" title="1.7 组件内绑定数据和方法"></a>1.7 组件内绑定数据和方法</h3><p>自定义组件内如若需要使用变量或函数，则需要先在自定义组件的js文件中进行定义声明。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 组件的初始数据</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">data: &#123;</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 组件的方法列表</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">methods: &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">  /**
+   * 组件的初始数据
+   */
+  data: {
+
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+
+  }
+</code></pre>
 <p><strong>示例：</strong></p>
 <ol>
 <li><p>在zujian3.wxml中构建如下代码：</p>
@@ -364,7 +437,10 @@
 </li>
 </ol>
 <h3 id="2-2-箭头函数"><a href="#2-2-箭头函数" class="headerlink" title="2.2 箭头函数"></a>2.2 箭头函数</h3><p>箭头函数的语法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">([形参列表]) =&gt; &#123;</span><br><span class="line">    函数体和返回值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">([形参列表]) =&gt; {
+    函数体和返回值
+}
+</code></pre>
 <p>箭头函数的<strong>特点</strong>：</p>
 <ol>
 <li><p>如果只有一个参数，则”()”可以省略不写；</p>
@@ -381,13 +457,18 @@
 <p>export命令用于规定模块的对外接口；import命令用于输入其他模块提供的功能；</p>
 <p><strong>==注意：==</strong>如果在html中的script里导入模块，则需要为script标签设置属性type=”module”。</p>
 <h4 id="2-4-1-导出变量和常量"><a href="#2-4-1-导出变量和常量" class="headerlink" title="2.4.1 导出变量和常量"></a>2.4.1 导出变量和常量</h4><h5 id="普通export方式"><a href="#普通export方式" class="headerlink" title="普通export方式"></a>普通export方式</h5><p>语法：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> 变量或常量;</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/12/09/小程序04/33" alt="1544343561225"></p>
+<pre><code>export 变量或常量;
+</code></pre><p><img src="/2018/12/09/小程序04/33" alt="1544343561225"></p>
 <p>使用常规方式导出变量或常量，那么在导入的文件中应该使用如下图所示的方式去导入：</p>
 <p><img src="/2018/12/09/小程序04/34" alt="1544344000040"></p>
 <h5 id="default的export方式"><a href="#default的export方式" class="headerlink" title="default的export方式"></a>default的export方式</h5><p>语法：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span><span class="built_in"> default </span>&#123;</span><br><span class="line">    变量或常量1,</span><br><span class="line">    变量或常量2,</span><br><span class="line">    <span class="built_in">..</span>.</span><br><span class="line">    变量或常量n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/12/09/小程序04/35" alt="1544344018763"></p>
+<pre><code>export default {
+    变量或常量1,
+    变量或常量2,
+    ...
+    变量或常量n
+}
+</code></pre><p><img src="/2018/12/09/小程序04/35" alt="1544344018763"></p>
 <p>如果使用这种方式去到处变量和常量的话，那么在导入的文件中应该使用如下图所示的方式去导入：</p>
 <p><img src="/2018/12/09/小程序04/36" alt="1544344058171"></p>
 <h4 id="2-4-2-导出函数"><a href="#2-4-2-导出函数" class="headerlink" title="2.4.2 导出函数"></a>2.4.2 导出函数</h4><p><img src="/2018/12/09/小程序04/37" alt="1544345019814"></p>
@@ -406,19 +487,47 @@
 </ul>
 <h4 id="3-3-资源路径"><a href="#3-3-资源路径" class="headerlink" title="3.3 资源路径"></a>3.3 资源路径</h4><p>在RESTful API中, 每个资源路径对应一个唯一的资源, 所以规定网址中不能有动词, 只能有名词, 并且一般来说为复数。 </p>
 <p>如：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/movies<span class="comment">----表示电影资源</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/images<span class="comment">----表示图片资源</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/musics<span class="comment">----表示音乐资源</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/articles<span class="comment">----表示文章资源</span></span><br><span class="line"></span><br><span class="line">为了方便开发, 可以在URI中加入版本号</span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/api/v1/movies<span class="comment">----表示电影资源 get获取多条记录  post 添加</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/soap/v1/images/<span class="number">1</span> <span class="comment">----表示图片资源  获单条 修改 删除</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/api/v1/musics<span class="comment">----表示音乐资源</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/api/v1/articles<span class="comment">----表示文章资源</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-4-http动词"><a href="#3-4-http动词" class="headerlink" title="3.4 http动词"></a>3.4 http动词</h4><p>对于资源, 一般有4个操作, CURD(==增/删/改/查==) </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET/HEAD: 	    从服务器获取资源(一项或多项)</span><br><span class="line">POST:	    在服务器新建一个资源</span><br><span class="line">PUT/PATCH:		在服务器更新资源, 服务器返回完整的属性</span><br><span class="line"><span class="keyword">DELETE</span>:	从服务器删除资源</span><br><span class="line"></span><br><span class="line">例: </span><br><span class="line">POST /articles 		<span class="comment">--	创建文章内容</span></span><br><span class="line"><span class="keyword">GET</span>  /articles        <span class="comment">-- 获取全部</span></span><br><span class="line"><span class="keyword">GET</span> /articles/<span class="number">1</span>	    <span class="comment">--	获取主键id为1的文章</span></span><br><span class="line">PUT /articles/<span class="number">1</span>	    <span class="comment">--	修改参数为1的文章</span></span><br><span class="line"><span class="keyword">DELETE</span> /articles/<span class="number">1</span>	<span class="comment">--	删除参数为1的文章</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-5-过滤信息"><a href="#3-5-过滤信息" class="headerlink" title="3.5 过滤信息"></a>3.5 过滤信息</h4><p>当服务端需要返回的数据很多时, 服务器不可能全部返回，此时我们可以在客户端携带过滤信息, </p>
+<pre><code>http://api.local.com/movies----表示电影资源
+http://api.local.com/images----表示图片资源
+http://api.local.com/musics----表示音乐资源
+http://api.local.com/articles----表示文章资源
+
+为了方便开发, 可以在URI中加入版本号
+http://api.local.com/api/v1/movies----表示电影资源 get获取多条记录  post 添加
+http://api.local.com/soap/v1/images/1 ----表示图片资源  获单条 修改 删除
+http://api.local.com/api/v1/musics----表示音乐资源
+http://api.local.com/api/v1/articles----表示文章资源
+</code></pre><h4 id="3-4-http动词"><a href="#3-4-http动词" class="headerlink" title="3.4 http动词"></a>3.4 http动词</h4><p>对于资源, 一般有4个操作, CURD(==增/删/改/查==) </p>
+<pre><code>GET/HEAD:         从服务器获取资源(一项或多项)
+POST:        在服务器新建一个资源
+PUT/PATCH:        在服务器更新资源, 服务器返回完整的属性
+DELETE:    从服务器删除资源
+
+例: 
+POST /articles         --    创建文章内容
+GET  /articles        -- 获取全部
+GET /articles/1        --    获取主键id为1的文章
+PUT /articles/1        --    修改参数为1的文章
+DELETE /articles/1    --    删除参数为1的文章
+</code></pre><h4 id="3-5-过滤信息"><a href="#3-5-过滤信息" class="headerlink" title="3.5 过滤信息"></a>3.5 过滤信息</h4><p>当服务端需要返回的数据很多时, 服务器不可能全部返回，此时我们可以在客户端携带过滤信息, </p>
 <p>比如: 分页信息。 </p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">page</span>=1					--	第一页的信息</span><br><span class="line">?<span class="attribute">offset</span>=10&amp;limit=10	    --	每页10条, 偏移10</span><br><span class="line">?<span class="attribute">name</span>=张                   --  查询姓名以张开头的人</span><br></pre></td></tr></table></figure>
-<h4 id="3-6-响应状态码"><a href="#3-6-响应状态码" class="headerlink" title="3.6 响应状态码"></a>3.6 响应状态码</h4><p>服务端返回的信息, 用来告诉客户端操作结果。</p>
+<pre><code>?page=1                    --    第一页的信息
+?offset=10&amp;limit=10        --    每页10条, 偏移10
+?name=张                   --  查询姓名以张开头的人
+</code></pre><h4 id="3-6-响应状态码"><a href="#3-6-响应状态码" class="headerlink" title="3.6 响应状态码"></a>3.6 响应状态码</h4><p>服务端返回的信息, 用来告诉客户端操作结果。</p>
 <p><img src="/2018/12/09/小程序04/2" alt="1544275626518"></p>
 <h4 id="3-7-错误处理"><a href="#3-7-错误处理" class="headerlink" title="3.7 错误处理"></a>3.7 错误处理</h4><p>如果状态码是4xx或者5xx, 需要告诉客户端对应的错误信息。以<strong>Json</strong>格式返回，如：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">“<span class="keyword">error</span>”: “错误信息”,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="3-8-返回结果"><a href="#3-8-返回结果" class="headerlink" title="3.8 返回结果"></a>3.8 返回结果</h4><p>针对不同的操作, 服务需要返回的结果应该符合这样的规范。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /collections 		<span class="comment">--	返回资源列表(数组)  200</span></span><br><span class="line">GET /collections/:<span class="built_in">id</span>		<span class="comment">--	返回单个资源   200</span></span><br><span class="line">POST /collections		<span class="comment">--	返回新生成的资源 201</span></span><br><span class="line">PUT /collections/:<span class="built_in">id</span>		<span class="comment">--	返回资源的完整属性 201/202</span></span><br><span class="line">PATCH /collections/:<span class="built_in">id</span>	<span class="comment">--	返回被修改的属性 201/202</span></span><br><span class="line">DELETE /collections/:<span class="built_in">id</span>	<span class="comment">--	返回204状态码+空文档</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-9-推荐接口调试工具"><a href="#3-9-推荐接口调试工具" class="headerlink" title="3.9 推荐接口调试工具"></a>3.9 推荐接口调试工具</h4><p>postman：<a href="https://www.getpostman.com/apps" target="_blank" rel="noopener">https://www.getpostman.com/apps</a></p>
+<pre><code>{
+“error”: “错误信息”,
+}
+</code></pre><h4 id="3-8-返回结果"><a href="#3-8-返回结果" class="headerlink" title="3.8 返回结果"></a>3.8 返回结果</h4><p>针对不同的操作, 服务需要返回的结果应该符合这样的规范。</p>
+<pre><code>GET /collections         --    返回资源列表(数组)  200
+GET /collections/:id        --    返回单个资源   200
+POST /collections        --    返回新生成的资源 201
+PUT /collections/:id        --    返回资源的完整属性 201/202
+PATCH /collections/:id    --    返回被修改的属性 201/202
+DELETE /collections/:id    --    返回204状态码+空文档
+</code></pre><h4 id="3-9-推荐接口调试工具"><a href="#3-9-推荐接口调试工具" class="headerlink" title="3.9 推荐接口调试工具"></a>3.9 推荐接口调试工具</h4><p>postman：<a href="https://www.getpostman.com/apps" target="_blank" rel="noopener">https://www.getpostman.com/apps</a></p>
 <p>在chrome中也可以安装postman的扩展工具。</p>
 <h3 id="4-常用的小程序API"><a href="#4-常用的小程序API" class="headerlink" title="4. 常用的小程序API"></a>4. 常用的小程序API</h3><p>通过小程序提供的api接口wx.request(OBJECT) 来实现，它可以发起 HTTPS 网络请求。</p>
 <p>在==生产环境下==：</p>
@@ -450,8 +559,20 @@
 <p>2）模块功能中的导出(export)和导入(import)</p>
 </li>
 <li><p>发起网络请求</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">      url: <span class="string">'http://www.home.com/class/day7/code/code4.php'</span>,</span><br><span class="line">      data: &#123;&#125;,</span><br><span class="line">      header: &#123;<span class="string">'content-type'</span>:<span class="string">'application/json'</span>&#125;,</span><br><span class="line">      method: <span class="string">'GET'</span>,</span><br><span class="line">      dataType: <span class="string">'json'</span>,</span><br><span class="line">      responseType: <span class="string">'text'</span>,</span><br><span class="line">      success: <span class="function"><span class="params">(result)</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">      &#125;,</span><br><span class="line">      fail: <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;,</span><br><span class="line">      complete: <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
-</li>
+<pre><code>wx.request({
+      url: &#39;http://www.home.com/class/day7/code/code4.php&#39;,
+      data: {},
+      header: {&#39;content-type&#39;:&#39;application/json&#39;},
+      method: &#39;GET&#39;,
+      dataType: &#39;json&#39;,
+      responseType: &#39;text&#39;,
+      success: (result)=&gt;{
+        console.log(result);
+      },
+      fail: ()=&gt;{},
+      complete: ()=&gt;{}
+    })
+</code></pre></li>
 </ol>
 
             <div class="post-copyright">
