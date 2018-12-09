@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>微信小程序04 | zhouhw627&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="blog">
+  
+  <meta name="description" content="一、微信小程序041. 自定义组件微信小程序已经提供了许多现成的组件供我们使用，但是我们还是可以在小程序中构建自定义组件，以满足在开发过程中的一些个性化功能重用的需求。 文档：https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/ 1.1 创建自定义组件一个自定义组件由 json wxml wxss">
+<meta name="keywords" content="微信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序04">
+<meta property="og:url" content="https://zhouhw627.github.io/2018/12/09/小程序04/index.html">
+<meta property="og:site_name" content="zhouhw627&#39;s blog">
+<meta property="og:description" content="一、微信小程序041. 自定义组件微信小程序已经提供了许多现成的组件供我们使用，但是我们还是可以在小程序中构建自定义组件，以满足在开发过程中的一些个性化功能重用的需求。 文档：https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/ 1.1 创建自定义组件一个自定义组件由 json wxml wxss">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/86">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/87">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/88">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/89">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/90">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/91">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/92">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/5">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/6">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/7">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/8">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/9">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/10">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/11">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/12">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/13">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/14">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/15">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/16">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/17">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/18">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/19">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/20">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/24">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/21">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/22">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/23">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/25">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/26">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/27">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/28">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/29">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/30">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/31">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/32">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/33">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/34">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/35">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/36">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/37">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/39">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/1">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/2">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/3">
+<meta property="og:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/40">
+<meta property="og:updated_time" content="2018-12-09T12:40:44.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序04">
+<meta name="twitter:description" content="一、微信小程序041. 自定义组件微信小程序已经提供了许多现成的组件供我们使用，但是我们还是可以在小程序中构建自定义组件，以满足在开发过程中的一些个性化功能重用的需求。 文档：https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/ 1.1 创建自定义组件一个自定义组件由 json wxml wxss">
+<meta name="twitter:image" content="https://zhouhw627.github.io/2018/12/09/小程序04/86">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">zhouhw627&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        zhouhw627&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="MinHow" target="_blank" href="//minhow.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/wongminho">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/WongMinHo">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/huangminhow">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-小程序04" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      微信小程序04
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/web前端/">web前端</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-12-09
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="一、微信小程序04"><a href="#一、微信小程序04" class="headerlink" title="一、微信小程序04"></a>一、微信小程序04</h1><h2 id="1-自定义组件"><a href="#1-自定义组件" class="headerlink" title="1. 自定义组件"></a>1. 自定义组件</h2><p>微信小程序已经提供了许多现成的组件供我们使用，但是我们还是可以在小程序中构建自定义组件，以满足在开发过程中的一些个性化功能重用的需求。</p>
+<p>文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/</a></p>
+<h3 id="1-1-创建自定义组件"><a href="#1-1-创建自定义组件" class="headerlink" title="1.1 创建自定义组件"></a>1.1 创建自定义组件</h3><p>一个自定义组件由 <code>json</code> <code>wxml</code> <code>wxss</code> <code>js</code> 4个文件组成。 </p>
+<p>必要条件：要在 <code>json</code> 文件中进行自定义组件声明</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"component"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<ol>
+<li><p>我们一般会把组件放到一个专门存放的文件夹中，所以我们现在在项目根目录下创建一个名为component的文件夹（这个文件夹的名字可以任意取），</p>
+<p><img src="/2018/12/09/小程序04/86" alt="1544173878327"></p>
+<p>那么这个文件夹以后就是我们专门存放自定义组件的文件夹。</p>
+</li>
+<li><p>然后我们在component文件夹中创建我们第一个自定义组件，其实就是创建一个新的目录，</p>
+<p><img src="/2018/12/09/小程序04/87" alt="1544173948263"></p>
+<p>创建好文件夹后，右键点击该文件夹（注意需要使用微信提供的开发工具来进行操作）选择”创建component”</p>
+<p><img src="/2018/12/09/小程序04/88" alt="1544174013522"></p>
+<p>点击后，工具会自动帮我们生成自定义组件需要的四个文件：</p>
+<p><img src="/2018/12/09/小程序04/89" alt="1544174052725"></p>
+</li>
+<li><p>我们打开zujian1.json，</p>
+<p><img src="/2018/12/09/小程序04/90" alt="1544174143038"></p>
+</li>
+</ol>
+<h3 id="1-2-使用自定义组件"><a href="#1-2-使用自定义组件" class="headerlink" title="1.2 使用自定义组件"></a>1.2 使用自定义组件</h3><p>使用已注册的自定义组件前，首先要在使用方页面的 <code>json</code> 文件中进行引用声明。 </p>
+<p>自定义组件申明方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"usingComponents"</span>:&#123;</span><br><span class="line">        <span class="string">"组件名"</span>:<span class="string">"组件所在路径"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<ol>
+<li><p>首先要在使用的页面的json文件中声明当前使用的组件（其实就相当于设定代替自定义组件的标签名），如当前我们在use_zujian页面的use_zujian.json中所作的配置：</p>
+<p><img src="/2018/12/09/小程序04/91" alt="1544174842635"></p>
+</li>
+<li><p>做好了如上图所示的配置后，就可以在use_zujian页面中去使用了，如我们在use_zujian.wxml中使用引入的组件：</p>
+<p><img src="/2018/12/09/小程序04/92" alt="1544174896111"></p>
+<p>其实就是使用了刚才绑定的标签名。</p>
+</li>
+</ol>
+<p>注意事项：</p>
+<ul>
+<li><p>因为WXML节点标签名只能是小写字母、中划线和下划线的组合，所以自定义组件的标签名也只能包含这些字符。</p>
+</li>
+<li><p>自定义组件也是可以引用自定义组件的，引用方法类似于页面引用自定义组件的方式（使用 <code>usingComponents</code> 字段）。</p>
+<ol>
+<li><p>首先必须要有一个新的组件，比如当前我们构建了一个新的自定义组件zujian2:</p>
+<p><img src="/2018/12/09/小程序04/5" alt="1544321575632"></p>
+</li>
+<li><p>然后在zujian1中使用上自定义组件zujian2：在zujian1.json中进行如下配置：</p>
+<p><img src="/2018/12/09/小程序04/6" alt="1544321635068"></p>
+<p>接着就可以在zujian1.wxml中直接使用引入的zujian2：</p>
+<p><img src="/2018/12/09/小程序04/7" alt="1544321677813"></p>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p>自定义组件和使用自定义组件的页面所在项目根目录名不能以“wx-”为前缀，否则会报错。</p>
+</li>
+<li><p>旧版本的基础库不支持自定义组件，此时，引用自定义组件的节点会变为默认的空节点。</p>
+</li>
+</ul>
+<h3 id="1-3-lt-slot-gt-节点"><a href="#1-3-lt-slot-gt-节点" class="headerlink" title="1.3 &lt;slot&gt; 节点"></a>1.3 <code>&lt;slot&gt;</code> 节点</h3><p>在组件模板中可以提供一个 <code>&lt;slot&gt;</code> 节点，用于承载组件引用时提供的子节点。 </p>
+<p><strong>示例：</strong></p>
+<ol>
+<li><p>在自定义组件中构建一个<slot>节点</slot></p>
+<p><img src="/2018/12/09/小程序04/8" alt="1544322389040"></p>
+</li>
+<li><p>然后在use_zujian页面中调取自定义组件标签时给自定义组件标签内设置内容：</p>
+<p><img src="/2018/12/09/小程序04/9" alt="1544322462213"></p>
+<p>所以最终的结果是<aa>标签中的内容把自定义模板里的<slot>给替换了。</slot></aa></p>
+<p><img src="/2018/12/09/小程序04/10" alt="1544322511913"></p>
+</li>
+</ol>
+<p><strong>==注意：==</strong>默认情况下，一个组件的wxml中只能有一个slot。需要使用多slot时，可以在自定义组件js中声明启用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  options: &#123;</span><br><span class="line">    multipleSlots: <span class="literal">true</span> <span class="comment">// 在组件定义时的选项中启用多slot支持</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>此时，可以在这个组件的wxml中使用多个slot，以不同的 <code>name</code> 来区分：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"before"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span>这里是组件的内部细节<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"after"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用时，用 <code>slot</code> 属性来将节点插入到不同的slot上：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">component-tag-name</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这部分内容将被放置在组件 &lt;slot name="before"&gt; 的位置上 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">slot</span>=<span class="string">"before"</span>&gt;</span>这里是插入到组件slot name="before"中的内容<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这部分内容将被放置在组件 &lt;slot name="after"&gt; 的位置上 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">slot</span>=<span class="string">"after"</span>&gt;</span>这里是插入到组件slot name="after"中的内容<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">component-tag-name</span>&gt;</span>	</span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<ol>
+<li><p>在自定义组件zujian1.wxml中构建三个slot节点：</p>
+<p><img src="/2018/12/09/小程序04/11" alt="1544323075587"></p>
+</li>
+<li><p>然后在使用自定义组件的页面调取自定义组件的标签，并且为slot传值：</p>
+<p><img src="/2018/12/09/小程序04/12" alt="1544323137052"></p>
+<p>所以最终的效果为slot属性值为s1的内容将会放到自定义模板slot的name值为s1的地方去，故最终”金沙水拍云崖暖”显示在了第一条，</p>
+<p><img src="/2018/12/09/小程序04/13" alt="1544323213976"></p>
+</li>
+</ol>
+<h3 id="1-4-外部样式类"><a href="#1-4-外部样式类" class="headerlink" title="1.4 外部样式类"></a>1.4 外部样式类</h3><p>有时，组件希望接受外部传入的样式类。此时可以在 <code>Component</code> 中用 <code>externalClasses</code> 定义段定义若干个外部样式类：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  externalClasses: [<span class="string">'my-class'</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这样，组件内的效果将会受到外部样式的影响：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">custom-component</span> <span class="attr">class</span>=<span class="string">"my-class"</span>&gt;</span>这段文本的颜色由组件外的 class 决定<span class="tag">&lt;/<span class="name">custom-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>==注意：==</strong>在同一个节点上使用普通样式类和外部样式类时，两个类的优先级是未定义的，因此最好避免这种情况。</p>
+<p><strong>示例：</strong></p>
+<ol>
+<li><p>在use_zujian.wxml中构建如下引用自定义组件的代码，并且为这个自定义组件设置一个类名：</p>
+<p><img src="/2018/12/09/小程序04/14" alt="1544324495617"></p>
+<p>然后在use_zujian.wxss中专门为这个类名设置样式：</p>
+<p><img src="/2018/12/09/小程序04/15" alt="1544324542814"></p>
+</li>
+<li><p>但是默认情况下外部的样式是无法对自定义组件内部的样式产生影响的，所以还需要额外在自定义组件内部的js文件中进行样式类名引入的配置：比如当前在zujian1.js中做出了如下配置：</p>
+<p><img src="/2018/12/09/小程序04/16" alt="1544324615870"></p>
+<p>这句话的意思，就相当于将外部一个类名为zujian1_style对应的样式引入进自定义模板zujian1中影响zujian1的效果：</p>
+<p><img src="/2018/12/09/小程序04/17" alt="1544324685322"></p>
+</li>
+</ol>
+<h3 id="1-5-全局样式"><a href="#1-5-全局样式" class="headerlink" title="1.5 全局样式"></a>1.5 全局样式</h3><p>使用外部样式类可以让组件使用指定的组件外样式类，如果希望组件外样式类能够完全影响组件内部，可以将组件构造器中的<code>options.addGlobalClass</code>字段置为<code>true</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 组件 custom-component.js */</span></span><br><span class="line">Component(&#123;</span><br><span class="line">  options: &#123;</span><br><span class="line">    addGlobalClass: <span class="literal">true</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>设置后在组件的模板文件中：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 组件 custom-component.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">"red-text"</span>&gt;</span>这段文本的颜色由组件外的 class 决定<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>当开放了全局样式类，存在外部样式污染组件样式的风险，请谨慎选择。 </p>
+<p><strong>示例：</strong></p>
+<p><img src="/2018/12/09/小程序04/18" alt="1544326294831"></p>
+<h3 id="1-6-传递模板数据"><a href="#1-6-传递模板数据" class="headerlink" title="1.6 传递模板数据"></a>1.6 传递模板数据</h3><p>与普通的 WXML 模板类似，可以使用数据绑定，这样就可以向子组件的属性传递动态数据，但是需要注意，绑定数据前，需要在自定义模板的js文件中进行申明： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line"></span><br><span class="line">  properties: &#123;</span><br><span class="line">    属性<span class="number">1</span>: &#123;</span><br><span class="line">      type:数据类型,  <span class="comment">//支持的数据类型：String、Array、Object、null、Boolean、Number</span></span><br><span class="line">      value: 默认值</span><br><span class="line">    &#125;,</span><br><span class="line">    属性<span class="number">2</span>: &#123;</span><br><span class="line">      type: 数据类型,</span><br><span class="line">      value: 默认值,</span><br><span class="line">      observer(新值, 老值, 属性名)&#123;<span class="comment">//回调函数</span></span><br><span class="line">          </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>下面是使用自定义组件的页面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引用组件的页面模板 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">component-tag-name</span> 属性<span class="attr">1</span>=<span class="string">"属性1值"</span> 属性<span class="attr">2</span>=<span class="string">"属性2值"</span>&gt;</span></span><br><span class="line">      ....</span><br><span class="line">  <span class="tag">&lt;/<span class="name">component-tag-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<ol>
+<li><p>首先在use_zujian.wxml中构建如下代码，调用自定义组件并且给自定义主键传递数据：</p>
+<p><img src="/2018/12/09/小程序04/19" alt="1544337233455"></p>
+</li>
+<li><p>然后在zujian3.js中进行如下设置：</p>
+<p><img src="/2018/12/09/小程序04/20" alt="1544337284969"></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>最后在zujian3.wxml中就可以直接像使用变量一样使用外部传递进来的数据：</p>
+<p><img src="/2018/12/09/小程序04/24" alt="1544339114126"></p>
+</li>
+</ol>
+<h3 id="1-7-组件内绑定数据和方法"><a href="#1-7-组件内绑定数据和方法" class="headerlink" title="1.7 组件内绑定数据和方法"></a>1.7 组件内绑定数据和方法</h3><p>自定义组件内如若需要使用变量或函数，则需要先在自定义组件的js文件中进行定义声明。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 组件的初始数据</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">data: &#123;</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 组件的方法列表</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">methods: &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<ol>
+<li><p>在zujian3.wxml中构建如下代码：</p>
+<p><img src="/2018/12/09/小程序04/21" alt="1544338199420"></p>
+</li>
+<li><p>然后在zujian3.js中分别构建相关的变量数据和方法函数：</p>
+<p><img src="/2018/12/09/小程序04/22" alt="1544338246568"></p>
+<p>测试使用效果：</p>
+<p><img src="/2018/12/09/小程序04/23" alt="1544338278150"></p>
+</li>
+</ol>
+<h3 id="1-8-综合案例：将swiper组件构建成自定义组件"><a href="#1-8-综合案例：将swiper组件构建成自定义组件" class="headerlink" title="1.8 综合案例：将swiper组件构建成自定义组件"></a>1.8 综合案例：将swiper组件构建成自定义组件</h3><ol>
+<li><p>在小程序中创建一个新的自定义组件：</p>
+<p><img src="/2018/12/09/小程序04/25" alt="1544340847196"></p>
+</li>
+<li><p>然后在swiper.wxml中构建如下代码：</p>
+<p><img src="/2018/12/09/小程序04/26" alt="1544340887013"></p>
+<p>因为要用到外部传递进来的变量，所以还需要在swiper.js中申明这个需要使用的变量：</p>
+<p><img src="/2018/12/09/小程序04/27" alt="1544340999938"></p>
+</li>
+<li><p>然后在新的页面use1_zujian中使用swiper组件：</p>
+<p><img src="/2018/12/09/小程序04/28" alt="1544341067438"></p>
+</li>
+<li><p>最终的效果为：</p>
+<p><img src="/2018/12/09/小程序04/29" alt="1544341099932"></p>
+</li>
+</ol>
+<h2 id="2-ES6"><a href="#2-ES6" class="headerlink" title="2. ES6"></a>2. ES6</h2><p>CMAScript 6（以下简称ES6）是JavaScript语言的下一代标准，已经在2015年6月正式发布了。Mozilla公司将在这个标准的基础上，推出JavaScript 2.0。</p>
+<p>ECMAScript和JavaScript到底是什么关系？很多初学者会感到困惑，简单来说，ECMAScript是JavaScript语言的国际标准，JavaScript是ECMAScript的实现。</p>
+<p>1996年11月，JavaScript的创造者Netscape公司，决定将JavaScript提交给国际标准化组织ECMA，希望这种语言能够成为国际标准。次年，ECMA发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为ECMAScript。这个版本就是ECMAScript 1.0版。</p>
+<p>ES6的目标，是使得JavaScript语言可以用来编写大型的复杂的应用程序，成为企业级开发语言。</p>
+<h3 id="2-1-申明变量"><a href="#2-1-申明变量" class="headerlink" title="2.1 申明变量"></a>2.1 申明变量</h3><p>申明关键字：==var== 或 ==let==</p>
+<p>var申明的变量和let申明的变量<strong>区别</strong>：</p>
+<ol>
+<li><p>let存在块级作用域，而var没有；</p>
+</li>
+<li><p>let申明的变量不可以重复申明，但是可以赋值，而var的可以重复申明；</p>
+</li>
+</ol>
+<h3 id="2-2-箭头函数"><a href="#2-2-箭头函数" class="headerlink" title="2.2 箭头函数"></a>2.2 箭头函数</h3><p>箭头函数的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">([形参列表]) =&gt; &#123;</span><br><span class="line">    函数体和返回值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>箭头函数的<strong>特点</strong>：</p>
+<ol>
+<li><p>如果只有一个参数，则”()”可以省略不写；</p>
+<p><img src="/2018/12/09/小程序04/30" alt="1544342243543"></p>
+</li>
+<li><p>如果函数体只有一条语句，则”{}”可以省略不写；</p>
+<p><img src="/2018/12/09/小程序04/31" alt="1544342254128"></p>
+</li>
+<li><p>不改变this指针的指向（在接口请求案例中进行测试）；</p>
+</li>
+</ol>
+<h3 id="2-3-申明类"><a href="#2-3-申明类" class="headerlink" title="2.3 申明类"></a>2.3 申明类</h3><p><img src="/2018/12/09/小程序04/32" alt="1544342948376"></p>
+<h3 id="2-4-模块功能"><a href="#2-4-模块功能" class="headerlink" title="2.4 模块功能"></a>2.4 模块功能</h3><p>模块功能主要由两个命令构成：==export== 和 ==import==</p>
+<p>export命令用于规定模块的对外接口；import命令用于输入其他模块提供的功能；</p>
+<p><strong>==注意：==</strong>如果在html中的script里导入模块，则需要为script标签设置属性type=”module”。</p>
+<h4 id="2-4-1-导出变量和常量"><a href="#2-4-1-导出变量和常量" class="headerlink" title="2.4.1 导出变量和常量"></a>2.4.1 导出变量和常量</h4><h5 id="普通export方式"><a href="#普通export方式" class="headerlink" title="普通export方式"></a>普通export方式</h5><p>语法：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> 变量或常量;</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/12/09/小程序04/33" alt="1544343561225"></p>
+<p>使用常规方式导出变量或常量，那么在导入的文件中应该使用如下图所示的方式去导入：</p>
+<p><img src="/2018/12/09/小程序04/34" alt="1544344000040"></p>
+<h5 id="default的export方式"><a href="#default的export方式" class="headerlink" title="default的export方式"></a>default的export方式</h5><p>语法：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span><span class="built_in"> default </span>&#123;</span><br><span class="line">    变量或常量1,</span><br><span class="line">    变量或常量2,</span><br><span class="line">    <span class="built_in">..</span>.</span><br><span class="line">    变量或常量n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/12/09/小程序04/35" alt="1544344018763"></p>
+<p>如果使用这种方式去到处变量和常量的话，那么在导入的文件中应该使用如下图所示的方式去导入：</p>
+<p><img src="/2018/12/09/小程序04/36" alt="1544344058171"></p>
+<h4 id="2-4-2-导出函数"><a href="#2-4-2-导出函数" class="headerlink" title="2.4.2 导出函数"></a>2.4.2 导出函数</h4><p><img src="/2018/12/09/小程序04/37" alt="1544345019814"></p>
+<h4 id="2-4-3-导出类"><a href="#2-4-3-导出类" class="headerlink" title="2.4.3 导出类"></a>2.4.3 导出类</h4><p><img src="/2018/12/09/小程序04/39" alt="1544345133585"></p>
+<h2 id="3-RESTful-API"><a href="#3-RESTful-API" class="headerlink" title="3. RESTful API"></a>3. RESTful API</h2><h4 id="3-1-什么是Restful"><a href="#3-1-什么是Restful" class="headerlink" title="3.1 什么是Restful"></a>3.1 什么是Restful</h4><p>RESTful是一种软件设计风格, 主要用于客户端与服务端交互的软件， 一般来说RESTful API基于==HTTP/HTTPS==协议, 通过某个唯一标识符(URI)请求对应的服务器资源(Resource)。</p>
+<p>主要包括6个方面:</p>
+<p><img src="/2018/12/09/小程序04/1" alt="1544274646086"></p>
+<h4 id="3-2-RESTful-API的作用"><a href="#3-2-RESTful-API的作用" class="headerlink" title="3.2 RESTful API的作用"></a>3.2 RESTful API的作用</h4><p>为前端(APP端/PC浏览器端/微信端等等)提供一套简单并且统一的请求方式来从后端(服务器)获取需要的数据。</p>
+<p>提供接口的方式：基于http/https协议</p>
+<p>返回接口数据的形式主要为：JSON  也有少数为xml</p>
+<ul>
+<li><p>降低开发的复杂性</p>
+</li>
+<li><p>提高系统的可伸缩性</p>
+</li>
+</ul>
+<h4 id="3-3-资源路径"><a href="#3-3-资源路径" class="headerlink" title="3.3 资源路径"></a>3.3 资源路径</h4><p>在RESTful API中, 每个资源路径对应一个唯一的资源, 所以规定网址中不能有动词, 只能有名词, 并且一般来说为复数。 </p>
+<p>如：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/movies<span class="comment">----表示电影资源</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/images<span class="comment">----表示图片资源</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/musics<span class="comment">----表示音乐资源</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/articles<span class="comment">----表示文章资源</span></span><br><span class="line"></span><br><span class="line">为了方便开发, 可以在URI中加入版本号</span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/api/v1/movies<span class="comment">----表示电影资源 get获取多条记录  post 添加</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/soap/v1/images/<span class="number">1</span> <span class="comment">----表示图片资源  获单条 修改 删除</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/api/v1/musics<span class="comment">----表示音乐资源</span></span><br><span class="line"><span class="keyword">http</span>://api.<span class="built_in">local</span>.com/api/v1/articles<span class="comment">----表示文章资源</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-4-http动词"><a href="#3-4-http动词" class="headerlink" title="3.4 http动词"></a>3.4 http动词</h4><p>对于资源, 一般有4个操作, CURD(==增/删/改/查==) </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET/HEAD: 	    从服务器获取资源(一项或多项)</span><br><span class="line">POST:	    在服务器新建一个资源</span><br><span class="line">PUT/PATCH:		在服务器更新资源, 服务器返回完整的属性</span><br><span class="line"><span class="keyword">DELETE</span>:	从服务器删除资源</span><br><span class="line"></span><br><span class="line">例: </span><br><span class="line">POST /articles 		<span class="comment">--	创建文章内容</span></span><br><span class="line"><span class="keyword">GET</span>  /articles        <span class="comment">-- 获取全部</span></span><br><span class="line"><span class="keyword">GET</span> /articles/<span class="number">1</span>	    <span class="comment">--	获取主键id为1的文章</span></span><br><span class="line">PUT /articles/<span class="number">1</span>	    <span class="comment">--	修改参数为1的文章</span></span><br><span class="line"><span class="keyword">DELETE</span> /articles/<span class="number">1</span>	<span class="comment">--	删除参数为1的文章</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-5-过滤信息"><a href="#3-5-过滤信息" class="headerlink" title="3.5 过滤信息"></a>3.5 过滤信息</h4><p>当服务端需要返回的数据很多时, 服务器不可能全部返回，此时我们可以在客户端携带过滤信息, </p>
+<p>比如: 分页信息。 </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attribute">page</span>=1					--	第一页的信息</span><br><span class="line">?<span class="attribute">offset</span>=10&amp;limit=10	    --	每页10条, 偏移10</span><br><span class="line">?<span class="attribute">name</span>=张                   --  查询姓名以张开头的人</span><br></pre></td></tr></table></figure>
+<h4 id="3-6-响应状态码"><a href="#3-6-响应状态码" class="headerlink" title="3.6 响应状态码"></a>3.6 响应状态码</h4><p>服务端返回的信息, 用来告诉客户端操作结果。</p>
+<p><img src="/2018/12/09/小程序04/2" alt="1544275626518"></p>
+<h4 id="3-7-错误处理"><a href="#3-7-错误处理" class="headerlink" title="3.7 错误处理"></a>3.7 错误处理</h4><p>如果状态码是4xx或者5xx, 需要告诉客户端对应的错误信息。以<strong>Json</strong>格式返回，如：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">“<span class="keyword">error</span>”: “错误信息”,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-8-返回结果"><a href="#3-8-返回结果" class="headerlink" title="3.8 返回结果"></a>3.8 返回结果</h4><p>针对不同的操作, 服务需要返回的结果应该符合这样的规范。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /collections 		<span class="comment">--	返回资源列表(数组)  200</span></span><br><span class="line">GET /collections/:<span class="built_in">id</span>		<span class="comment">--	返回单个资源   200</span></span><br><span class="line">POST /collections		<span class="comment">--	返回新生成的资源 201</span></span><br><span class="line">PUT /collections/:<span class="built_in">id</span>		<span class="comment">--	返回资源的完整属性 201/202</span></span><br><span class="line">PATCH /collections/:<span class="built_in">id</span>	<span class="comment">--	返回被修改的属性 201/202</span></span><br><span class="line">DELETE /collections/:<span class="built_in">id</span>	<span class="comment">--	返回204状态码+空文档</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-9-推荐接口调试工具"><a href="#3-9-推荐接口调试工具" class="headerlink" title="3.9 推荐接口调试工具"></a>3.9 推荐接口调试工具</h4><p>postman：<a href="https://www.getpostman.com/apps" target="_blank" rel="noopener">https://www.getpostman.com/apps</a></p>
+<p>在chrome中也可以安装postman的扩展工具。</p>
+<h3 id="4-常用的小程序API"><a href="#4-常用的小程序API" class="headerlink" title="4. 常用的小程序API"></a>4. 常用的小程序API</h3><p>通过小程序提供的api接口wx.request(OBJECT) 来实现，它可以发起 HTTPS 网络请求。</p>
+<p>在==生产环境下==：</p>
+<ol>
+<li>HTTPS 证书必须有效 而且是TLS1.2及以上版本；</li>
+<li>可以设置20个有效的https域名；</li>
+<li>最好要设置一下 app.json中request请求的超时时间；</li>
+</ol>
+<p>在==测试环境下==：</p>
+<ol>
+<li><p>测试支持的并发数请求为5个；</p>
+</li>
+<li><p>可以在微信提供的开发工具中不校验https证书；</p>
+<p><img src="/2018/12/09/小程序04/3" alt="1544276444326"></p>
+</li>
+</ol>
+<h4 id="发起网络请求"><a href="#发起网络请求" class="headerlink" title="发起网络请求"></a>发起网络请求</h4><p>文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/api/wx.request.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/api/wx.request.html</a></p>
+<p><strong>示例：</strong></p>
+<ol>
+<li><p>其实就是直接在需要发出请求页面的js文件中通过小程序提供的接口发起：</p>
+<p><img src="/2018/12/09/小程序04/40" alt="1544348464792"></p>
+</li>
+</ol>
+<h2 id="二-总结"><a href="#二-总结" class="headerlink" title="二.总结"></a>二.总结</h2><ol>
+<li><p>自定义组件</p>
+</li>
+<li><p>ES6</p>
+<p>1）调用父类构造器方法：super([实参列表])</p>
+<p>2）模块功能中的导出(export)和导入(import)</p>
+</li>
+<li><p>发起网络请求</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">      url: <span class="string">'http://www.home.com/class/day7/code/code4.php'</span>,</span><br><span class="line">      data: &#123;&#125;,</span><br><span class="line">      header: &#123;<span class="string">'content-type'</span>:<span class="string">'application/json'</span>&#125;,</span><br><span class="line">      method: <span class="string">'GET'</span>,</span><br><span class="line">      dataType: <span class="string">'json'</span>,</span><br><span class="line">      responseType: <span class="string">'text'</span>,</span><br><span class="line">      success: <span class="function"><span class="params">(result)</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">      &#125;,</span><br><span class="line">      fail: <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;,</span><br><span class="line">      complete: <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年12月09日 20:40</p>
+        <p>原始链接： <a class="post-url" href="/2018/12/09/小程序04/" title="微信小程序04">https://zhouhw627.github.io/2018/12/09/小程序04/</a></p>
+        <footer>
+            <a href="https://zhouhw627.github.io">
+                <img src="/images/logo.png" alt="zhouhw">
+                zhouhw
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zhouhw627.github.io/2018/12/09/小程序04/&title=《微信小程序04》 — zhouhw627's blog&pic=https://zhouhw627.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zhouhw627.github.io/2018/12/09/小程序04/&title=《微信小程序04》 — zhouhw627's blog&source=博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zhouhw627.github.io/2018/12/09/小程序04/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《微信小程序04》 — zhouhw627's blog&url=https://zhouhw627.github.io/2018/12/09/小程序04/&via=https://zhouhw627.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zhouhw627.github.io/2018/12/09/小程序04/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://zhouhw627.github.io/2018/12/09/小程序04/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/微信/" class="color3">微信</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、微信小程序04"><span class="post-toc-text">一、微信小程序04</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-自定义组件"><span class="post-toc-text">1. 自定义组件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-创建自定义组件"><span class="post-toc-text">1.1 创建自定义组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-使用自定义组件"><span class="post-toc-text">1.2 使用自定义组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-lt-slot-gt-节点"><span class="post-toc-text">1.3 &lt;slot&gt; 节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-外部样式类"><span class="post-toc-text">1.4 外部样式类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-5-全局样式"><span class="post-toc-text">1.5 全局样式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-6-传递模板数据"><span class="post-toc-text">1.6 传递模板数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-7-组件内绑定数据和方法"><span class="post-toc-text">1.7 组件内绑定数据和方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-8-综合案例：将swiper组件构建成自定义组件"><span class="post-toc-text">1.8 综合案例：将swiper组件构建成自定义组件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-ES6"><span class="post-toc-text">2. ES6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-申明变量"><span class="post-toc-text">2.1 申明变量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-箭头函数"><span class="post-toc-text">2.2 箭头函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-申明类"><span class="post-toc-text">2.3 申明类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-模块功能"><span class="post-toc-text">2.4 模块功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4-1-导出变量和常量"><span class="post-toc-text">2.4.1 导出变量和常量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#普通export方式"><span class="post-toc-text">普通export方式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#default的export方式"><span class="post-toc-text">default的export方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4-2-导出函数"><span class="post-toc-text">2.4.2 导出函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4-3-导出类"><span class="post-toc-text">2.4.3 导出类</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-RESTful-API"><span class="post-toc-text">3. RESTful API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-什么是Restful"><span class="post-toc-text">3.1 什么是Restful</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2-RESTful-API的作用"><span class="post-toc-text">3.2 RESTful API的作用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3-资源路径"><span class="post-toc-text">3.3 资源路径</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4-http动词"><span class="post-toc-text">3.4 http动词</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-5-过滤信息"><span class="post-toc-text">3.5 过滤信息</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-6-响应状态码"><span class="post-toc-text">3.6 响应状态码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-7-错误处理"><span class="post-toc-text">3.7 错误处理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-8-返回结果"><span class="post-toc-text">3.8 返回结果</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-9-推荐接口调试工具"><span class="post-toc-text">3.9 推荐接口调试工具</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-常用的小程序API"><span class="post-toc-text">4. 常用的小程序API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发起网络请求"><span class="post-toc-text">发起网络请求</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二-总结"><span class="post-toc-text">二.总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/05/微信开发03/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">微信开发03</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2018 zhouhw<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://zhouhw627.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/web前端/">web前端</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/微信/" style="font-size: 10px;">微信</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/微信/" style="font-size: 10px;">微信</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
